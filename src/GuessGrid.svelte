@@ -15,6 +15,7 @@
 <style>
     .guess-cell {
         border: 2px solid var(--color-light-gray);
+        border-radius: 4px;
         box-sizing: border-box;
         height: 64px;
     }
@@ -22,6 +23,6 @@
     .guess-grid {
         display: grid;
         grid-template-columns: repeat(5, 64px);
-        gap: 8px;
+        gap: 4px;
     }
 </style>

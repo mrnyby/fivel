@@ -1,39 +1,48 @@
-<div class="keyboard">
+<script lang="ts">
+    const handleKeyClick = (event: Event) => {
+        const eventElement = event.target as HTMLElement;
+        if (eventElement.matches("button")) {
+            console.log(eventElement.dataset.key);
+        }
+    };
+</script>
+
+<div class="keyboard" on:click={handleKeyClick}>
     <div class="row">
-        <button>Q</button>
-        <button>W</button>
-        <button>E</button>
-        <button>R</button>
-        <button>T</button>
-        <button>Y</button>
-        <button>U</button>
-        <button>I</button>
-        <button>O</button>
-        <button>P</button>
+        <button data-key="Q">Q</button>
+        <button data-key="W">W</button>
+        <button data-key="E">E</button>
+        <button data-key="R">R</button>
+        <button data-key="T">T</button>
+        <button data-key="Y">Y</button>
+        <button data-key="U">U</button>
+        <button data-key="I">I</button>
+        <button data-key="O">O</button>
+        <button data-key="P">P</button>
     </div>
     <div class="row">
         <div class="spacer" />
-        <button>A</button>
-        <button>S</button>
-        <button>D</button>
-        <button>F</button>
-        <button>G</button>
-        <button>H</button>
-        <button>J</button>
-        <button>K</button>
-        <button>L</button>
+        <button data-key="A">A</button>
+        <button data-key="S">S</button>
+        <button data-key="D">D</button>
+        <button data-key="F">F</button>
+        <button data-key="G">G</button>
+        <button data-key="H">H</button>
+        <button data-key="J">J</button>
+        <button data-key="K">K</button>
+        <button data-key="L">L</button>
         <div class="spacer" />
     </div>
     <div class="row">
-        <button>ENTER</button>
-        <button>Z</button>
-        <button>X</button>
-        <button>C</button>
-        <button>V</button>
-        <button>B</button>
-        <button>N</button>
-        <button>M</button>
-        <button>DELETE</button>
+        <button data-key="ENTER">ENTER</button>
+        <button data-key="Z">Z</button>
+        <button data-key="X">X</button>
+        <button data-key="C">C</button>
+        <button data-key="V">V</button>
+        <button data-key="B">B</button>
+        <button data-key="N">N</button>
+        <button data-key="M">M</button>
+        <button data-key="DELETE">DELETE</button>
     </div>
 </div>
 

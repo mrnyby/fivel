@@ -4,9 +4,9 @@
 	"private": true,
 	"scripts": {
 		"build": "rollup -c",
+		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"dev": "rollup -c -w",
-		"start": "sirv --no-clear",
-		"check": "svelte-check --tsconfig ./tsconfig.json"
+		"start": "sirv --no-clear"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^21.0.3",

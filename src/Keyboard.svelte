@@ -52,14 +52,15 @@
         border: none;
         border-radius: 4px;
         flex: 1;
-        font-size: 0.9em;
+        font-size: 0.8em;
         font-weight: bold;
-        margin: 4px;
-        padding: 16px 8px;
+        margin: 0.1em;
+        padding: 1em 0.3em;
     }
 
     .keyboard {
-        width: 500px;
+        max-width: 512px;
+        width: 96vw;
     }
 
     .row {

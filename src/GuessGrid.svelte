@@ -1,28 +1,13 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
-	import { currentGuess, pastGuesses } from './stores';
-
-	let guessCount: number;
-	const unsubscribe = pastGuesses.subscribe(guesses => guessCount = guesses.length);
-
-	onDestroy(unsubscribe);
+	import { guesses } from "./stores";
 </script>
 
 <div class="guess-grid">
-	<!-- Past guesses -->
-	{#each $pastGuesses as guess}
-		{#each guess as character}
-			<div class="guess-cell">{character}</div>
-		{/each}
-	{/each}
-	<!-- Current guess -->
-	{#each { length: 5 } as _, i}
-		<div class="guess-cell">{$currentGuess.charAt(i)}</div>
-	{/each}
-	<!-- Remaining guesses -->
-	{#each { length: 6 - guessCount } as _}
-		{#each { length: 5 } as _}
-			<div class="guess-cell"></div>
+	{#each $guesses as guess}
+		{#each guess.characters as character}
+			<div class="guess-cell" class:submitted={guess.isSubmitted}>
+				{character}
+			</div>
 		{/each}
 	{/each}
 </div>
@@ -32,12 +17,22 @@
 		border: 2px solid var(--color-light-gray);
 		border-radius: 4px;
 		box-sizing: border-box;
+		font-size: 32px;
 		height: 64px;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
 	.guess-grid {
 		display: grid;
 		grid-template-columns: repeat(5, 64px);
 		gap: 4px;
+	}
+
+	.submitted {
+		background: var(--color-gray);
+		color: #ffffff;
 	}
 </style>

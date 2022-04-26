@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { currentGuess } from "./stores";
+	import { guesses } from "./stores";
 
 	const handleKeyClick = (event: Event) => {
 		const eventElement = event.target as HTMLElement;
@@ -8,11 +8,13 @@
 
 			switch (key) {
 				case "ENTER":
+					guesses.submitGuess();
 					break;
 				case "DELETE":
+					guesses.deleteCharacter();
 					break;
 				default:
-					currentGuess.sendCharacter(key);
+					guesses.addCharacter(key);
 			}
 		}
 	};

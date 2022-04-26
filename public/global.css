@@ -1,7 +1,9 @@
 :root {
 	--color-light-gray: #dddddd;
+	--color-gray: #bbbbbb;
 }
 
 body {
+	font-family: Arial, sans-serif;
 	margin: 0;
 }

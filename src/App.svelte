@@ -11,14 +11,23 @@
 <style>
 	main {
 		box-sizing: border-box;
-		min-height: 100vh;
-		/* Safari doesn't know what 100vh means. Supposedly this helps it understand. */
-		min-height: -webkit-fill-available;
+		height: 100vh;
 		padding: 32px;
 
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 		justify-content: space-between;
+	}
+
+	/*
+	 * Apple thinks Safari's own UI elements should count as part of the height of the page content. That's pretty dumb.
+	 *
+	 * https://www.bram.us/2020/05/06/100vh-in-safari-on-ios/
+	 */
+	@supports(-webkit-touch-callout: none) {
+		main {
+			height: -webkit-fill-available;
+		}
 	}
 </style>

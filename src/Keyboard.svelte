@@ -64,6 +64,7 @@
 		background: var(--color-light-gray);
 		border: none;
 		border-radius: 4px;
+		color: var(--color-dark-gray);
 		flex: 1;
 		font-size: 0.9em;
 		font-weight: bold;

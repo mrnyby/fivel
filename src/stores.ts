@@ -1,22 +1,22 @@
-import { writable } from 'svelte/store';
-import Guess from './Guess';
+import { writable } from "svelte/store";
+import Guess from "./Guess";
 
 const createGuesses = () => {
 	const { subscribe, update } = writable(Array.from({ length: 6 }, () => new Guess()));
 
-	let guessCount = 0;
+	let nGuesses = 0;
 
 	return {
 		addCharacter: (character: string) => update(guesses => {
-			guesses[guessCount].addCharacter(character);
+			guesses[nGuesses].addCharacter(character);
 			return guesses;
 		}),
 		deleteCharacter: () => update(guesses => {
-			guesses[guessCount].deleteCharacter();
+			guesses[nGuesses].deleteCharacter();
 			return guesses;
 		}),
 		submitGuess: () => update(guesses => {
-			guesses[guessCount++].isSubmitted = true;
+			guesses[nGuesses++].submit('BLAMO');
 			return guesses;
 		}),
 		subscribe,

@@ -1,12 +1,18 @@
 <script lang="ts">
+	import { GuessCharacterColor } from "./GuessCharacter";
 	import { guesses } from "./stores";
 </script>
 
 <div class="guess-grid">
 	{#each $guesses as guess}
 		{#each guess.characters as character}
-			<div class="guess-cell" class:submitted={guess.isSubmitted}>
-				{character}
+			<div
+				class="guess-cell"
+				class:submitted={guess.isSubmitted}
+				class:green={character.color === GuessCharacterColor.Green}
+				class:yellow={character.color === GuessCharacterColor.Yellow}
+			>
+				{character.value}
 			</div>
 		{/each}
 	{/each}
@@ -34,5 +40,13 @@
 	.submitted {
 		background: var(--color-gray);
 		color: #ffffff;
+	}
+
+	.submitted.green {
+		background: var(--color-green);
+	}
+
+	.submitted.yellow {
+		background: var(--color-yellow);
 	}
 </style>

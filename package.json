@@ -6,14 +6,17 @@
 		"build": "rollup -c",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"dev": "rollup -c -w",
-		"start": "sirv --no-clear"
+		"start": "sirv --no-clear",
+		"test": "jest"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^22.0.0",
 		"@rollup/plugin-node-resolve": "^13.3.0",
 		"@rollup/plugin-typescript": "^8.0.0",
 		"@tsconfig/svelte": "^3.0.0",
-		"rollup": "^2.73.0",
+		"@types/jest": "^27.5.1",
+		"jest": "^28.1.0",
+		"rollup": "^2.74.1",
 		"rollup-plugin-css-only": "^3.1.0",
 		"rollup-plugin-livereload": "^2.0.0",
 		"rollup-plugin-svelte": "^7.0.0",
@@ -22,6 +25,7 @@
 		"svelte": "^3.48.0",
 		"svelte-check": "^2.7.1",
 		"svelte-preprocess": "^4.0.0",
+		"ts-jest": "^28.0.2",
 		"tslib": "^2.0.0",
 		"typescript": "^4.6.4"
 	}

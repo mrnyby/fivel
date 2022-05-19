@@ -1,4 +1,4 @@
-import GuessCharacter, { GuessCharacterColor } from "./GuessCharacter";
+import GuessCharacter, { GuessCharacterColor } from './GuessCharacter';
 
 export default class Guess {
 	characters = Array.from({ length: 5 }, () => new GuessCharacter());

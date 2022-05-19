@@ -16,7 +16,7 @@ const createGuesses = () => {
 			return guesses;
 		}),
 		submitGuess: () => update(guesses => {
-			guesses[nGuesses++].submit('BLAMO');
+			guesses[nGuesses++].submit("BLAMO");
 			return guesses;
 		}),
 		subscribe,

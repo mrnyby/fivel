@@ -1,4 +1,4 @@
-const x = [
+const dictionary = [
 	"aalii",
 	"Aaron",
 	"abaca",
@@ -10230,3 +10230,5 @@ const x = [
 	"zymic",
 	"zymin",
 ];
+
+export default dictionary;

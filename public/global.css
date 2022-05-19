@@ -3,12 +3,17 @@
 	--color-dark-gray: #444444;
 	--color-light-gray: #dddddd;
 
-	--color-green: #88cc88;
+	--color-green: #66bb6a;
 
-	--color-yellow: #ffdd44;
+	--color-yellow: #ffca28;
 }
 
 body {
 	font-family: Arial, sans-serif;
+	height: 100%;
 	margin: 0;
+}
+
+html {
+	height: 100%;
 }

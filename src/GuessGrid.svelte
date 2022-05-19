@@ -39,14 +39,17 @@
 
 	.submitted {
 		background: var(--color-gray);
+		border-color: var(--color-gray);
 		color: #ffffff;
 	}
 
 	.submitted.green {
 		background: var(--color-green);
+		border-color: var(--color-green);
 	}
 
 	.submitted.yellow {
 		background: var(--color-yellow);
+		border-color: var(--color-yellow);
 	}
 </style>

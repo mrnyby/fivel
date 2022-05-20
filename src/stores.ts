@@ -2,7 +2,7 @@ import { get, readable, writable } from "svelte/store";
 import Guess from "./Guess";
 import WordEncoder from "./WordEncoder";
 
-const createGuesses = () => {
+const _createGuesses = () => {
 	const { subscribe, update } = writable(Array.from({ length: 6 }, () => new Guess()));
 
 	let nGuesses = 0;
@@ -24,5 +24,8 @@ const createGuesses = () => {
 	};
 };
 
-export const encodedTargetWord = readable((new URLSearchParams(window.location.search)).get("id"));
-export const guesses = createGuesses();
+const _urlParams = new URLSearchParams(window.location.search);
+
+export const encodedTargetWord = readable(_urlParams.get("id"));
+export const guesses = _createGuesses();
+export const isGameSet = readable(_urlParams.get("id") !== null);

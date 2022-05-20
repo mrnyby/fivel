@@ -1,0 +1,130 @@
+<script lang="ts">
+	import dictionary from "./dictionary";
+	import { isGameSet } from "./stores";
+	import WordEncoder from "./WordEncoder";
+
+	let errorMessage = "";
+	let link = "";
+	let word = "";
+
+	const handleSubmit = (event: Event) => {
+		event.preventDefault();
+
+		errorMessage = "";
+		link = "";
+
+		if (!/[a-z]{5}/.test(word)) {
+			errorMessage = "Does that look like five letters to you?";
+			return;
+		}
+
+		if (!dictionary.includes(word)) {
+			errorMessage = "I don't think that's a word.";
+			return;
+		}
+
+		link = `http://localhost:8080?id=${WordEncoder.encode(word)}`;
+		// TODO: Auto-copy to the clipboard
+		// navigator.clipboard.writeText(link).then(() => );
+	};
+</script>
+
+{#if !$isGameSet}
+	<div class=dialog-overlay>
+		<dialog open>
+			<h1>Create a Puzzle</h1>
+			<label for=word>Enter a five-letter word</label>
+			<div class=input-group>
+				<input id=word autocomplete=off bind:value={word} maxlength=5>
+				<button on:click={handleSubmit}>
+					<span class=material-icons>add_link</span>
+				</button>
+			</div>
+			<span class=result class:error={errorMessage.length > 0}>
+				{#if errorMessage.length > 0}
+					{errorMessage}
+				{:else if link.length > 0}
+					<a href={link}>{link}</a>
+				{:else}
+					&nbsp;
+				{/if}
+			</span>
+		</dialog>
+	</div>
+{/if}
+
+<style>
+	button {
+		background: none;
+		border: 1px solid var(--color-gray);
+		border-left: 1px solid transparent;
+		border-radius: 0 4px 4px 0;
+		margin: 0;
+		outline: 1px solid transparent;
+		padding: 0 4px;
+		transition: all linear 0.1s;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	button:focus {
+		border-color: transparent;
+		outline-color: var(--color-dark-gray);
+	}
+
+	dialog {
+		border: none;
+		border-radius: 4px;
+
+		display: flex;
+		flex-direction: column;
+	}
+
+	h1 {
+		align-self: center;
+		margin-top: 0;
+	}
+
+	input {
+		background: transparent;
+		border: 1px solid var(--color-gray);
+		border-radius: 4px 0 0 4px;
+		font-size: 16px;
+		outline: 1px solid transparent;
+		padding: 4px;
+		transition: all linear 0.1s;
+	}
+
+	input:focus {
+		border-color: transparent;
+		outline-color: var(--color-dark-gray);
+	}
+
+	.dialog-overlay {
+		background: rgba(0, 0, 0, 0.3);
+
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+
+		display: flex;
+		align-items: center;
+	}
+
+	.error {
+		color: var(--color-red);
+	}
+
+	.input-group {
+		display: flex;
+		margin: 4px 0 16px 0;
+	}
+
+	.result {
+		align-self: center;
+	}
+</style>

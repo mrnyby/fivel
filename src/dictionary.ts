@@ -1737,6 +1737,7 @@ const dictionary = [
 	"bumph",
 	"bumpy",
 	"bumps",
+	"bunch",
 	"bunco",
 	"bundh",
 	"bunds",

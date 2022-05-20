@@ -3,15 +3,32 @@
 	--color-dark-gray: #444444;
 	--color-light-gray: #dddddd;
 
-	--color-green: #66bb6a;
-
+	--color-red: #ef5350;
 	--color-yellow: #ffca28;
+	--color-green: #66bb6a;
+}
+
+* {
+	color: var(--color-dark-gray);
 }
 
 body {
 	font-family: Arial, sans-serif;
 	height: 100%;
 	margin: 0;
+}
+
+button {
+	background: var(--color-light-gray);
+	border: none;
+	border-radius: 4px;
+	color: var(--color-dark-gray);
+	flex: 1;
+	font-size: 0.9em;
+	font-weight: bold;
+	margin: 0.1em;
+	padding: 0.5em 1em;
+	text-transform: uppercase;
 }
 
 html {

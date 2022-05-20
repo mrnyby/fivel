@@ -17,7 +17,10 @@ const _createGuesses = () => {
 			return guesses;
 		}),
 		submitGuess: () => update(guesses => {
-			guesses[nGuesses++].submit(WordEncoder.decode(get(encodedTargetWord)));
+			if (guesses[nGuesses].submit(WordEncoder.decode(get(encodedTargetWord)))) {
+				nGuesses++;
+			}
+
 			return guesses;
 		}),
 		subscribe,

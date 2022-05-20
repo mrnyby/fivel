@@ -25,6 +25,7 @@
 		box-sizing: border-box;
 		font-size: 32px;
 		height: 64px;
+		text-transform: uppercase;
 
 		display: flex;
 		align-items: center;

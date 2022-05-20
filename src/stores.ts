@@ -1,5 +1,6 @@
-import { writable } from "svelte/store";
+import { get, readable, writable } from "svelte/store";
 import Guess from "./Guess";
+import WordEncoder from "./WordEncoder";
 
 const createGuesses = () => {
 	const { subscribe, update } = writable(Array.from({ length: 6 }, () => new Guess()));
@@ -16,11 +17,12 @@ const createGuesses = () => {
 			return guesses;
 		}),
 		submitGuess: () => update(guesses => {
-			guesses[nGuesses++].submit("BLAMO");
+			guesses[nGuesses++].submit(WordEncoder.decode(get(encodedTargetWord)));
 			return guesses;
 		}),
 		subscribe,
 	};
 };
 
+export const encodedTargetWord = readable((new URLSearchParams(window.location.search)).get("id"));
 export const guesses = createGuesses();

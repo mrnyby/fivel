@@ -23,7 +23,7 @@
 			return;
 		}
 
-		link = `http://localhost:8080?id=${WordEncoder.encode(word)}`;
+		link = `${window.location.href}?id=${WordEncoder.encode(word)}`;
 		// TODO: Auto-copy to the clipboard
 		// navigator.clipboard.writeText(link).then(() => );
 	};

@@ -28,6 +28,7 @@
 	<div class="row">
 		{#each [..."qwertyuiop"] as key}
 			<button
+				class:gray={$keyColors[key] === GuessCharacterColor.Gray}
 				class:green={$keyColors[key] === GuessCharacterColor.Green}
 				class:yellow={$keyColors[key] === GuessCharacterColor.Yellow}
 				data-key={key}
@@ -40,6 +41,7 @@
 		<div class="spacer" />
 		{#each [..."asdfghjkl"] as key}
 			<button
+				class:gray={$keyColors[key] === GuessCharacterColor.Gray}
 				class:green={$keyColors[key] === GuessCharacterColor.Green}
 				class:yellow={$keyColors[key] === GuessCharacterColor.Yellow}
 				data-key={key}
@@ -53,6 +55,7 @@
 		<button data-key="enter">enter</button>
 		{#each [..."zxcvbnm"] as key}
 			<button
+				class:gray={$keyColors[key] === GuessCharacterColor.Gray}
 				class:green={$keyColors[key] === GuessCharacterColor.Green}
 				class:yellow={$keyColors[key] === GuessCharacterColor.Yellow}
 				data-key={key}
@@ -67,6 +70,11 @@
 <style>
 	button {
 		padding: 1em 0.3em;
+	}
+
+	button.gray {
+		background: var(--color-gray);
+		color: #ffffff;
 	}
 
 	button.green {

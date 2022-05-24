@@ -37,7 +37,7 @@ const _createKeyColors = () => {
 	const { subscribe, update } = writable(
 		[..."abcdefghijklmnopqrstuvwxyz"]
 			.reduce((accumulator, key) => {
-				accumulator[key] = GuessCharacterColor.Gray
+				accumulator[key] = null;
 				return accumulator;
 			}, {})
 	);
@@ -50,6 +50,11 @@ const _createKeyColors = () => {
 					break;
 				case GuessCharacterColor.Yellow:
 					if (keyColors[key] !== GuessCharacterColor.Green) {
+						keyColors[key] = color;
+					}
+					break;
+				case GuessCharacterColor.Gray:
+					if (keyColors[key] !== GuessCharacterColor.Green && keyColors[key] !== GuessCharacterColor.Yellow) {
 						keyColors[key] = color;
 					}
 			}

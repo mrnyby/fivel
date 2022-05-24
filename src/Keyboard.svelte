@@ -71,12 +71,12 @@
 
 	button.green {
 		background: var(--color-green);
-		color: white;
+		color: #ffffff;
 	}
 
 	button.yellow {
 		background: var(--color-yellow);
-		color: white;
+		color: #ffffff;
 	}
 
 	.keyboard {

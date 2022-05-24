@@ -13,19 +13,26 @@
 		errorMessage = "";
 		link = "";
 
-		if (!/[a-z]{5}/.test(word)) {
+		const lowerCaseWord = word.toLowerCase();
+
+		if (!/[a-z]{5}/.test(lowerCaseWord)) {
 			errorMessage = "Does that look like five letters to you?";
 			return;
 		}
 
-		if (!dictionary.includes(word)) {
+		if (!dictionary.includes(lowerCaseWord)) {
 			errorMessage = "I don't think that's a word.";
 			return;
 		}
 
-		link = `${window.location.href}?id=${WordEncoder.encode(word)}`;
-		// TODO: Auto-copy to the clipboard
-		// navigator.clipboard.writeText(link).then(() => );
+		link = `${window.location.href}?id=${WordEncoder.encode(lowerCaseWord)}`;
+		// TODO: Auto-copy to clipboard
+		// navigator.clipboard.writeText(link).then(() => {
+		// 	isCopySuccessVisible = true;
+		// 	setTimeout(() => {
+		// 		isCopySuccessVisible = false;
+		// 	}, 4000);
+		// });
 	};
 </script>
 

@@ -89,6 +89,7 @@
 
 	.keyboard {
 		max-width: 512px;
+		touch-action: manipulation;
 		width: 96vw;
 	}
 

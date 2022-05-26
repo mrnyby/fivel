@@ -1,5 +1,4 @@
 <script lang="ts">
-	import dictionary from "./dictionary";
 	import { isGameSet } from "./stores";
 	import WordEncoder from "./WordEncoder";
 
@@ -17,11 +16,6 @@
 
 		if (!/[a-z]{5}/.test(lowerCaseWord)) {
 			errorMessage = "Does that look like five letters to you?";
-			return;
-		}
-
-		if (!dictionary.includes(lowerCaseWord)) {
-			errorMessage = "I don't think that's a word.";
 			return;
 		}
 

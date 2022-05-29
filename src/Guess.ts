@@ -1,3 +1,4 @@
+import dictionary from './dictionary';
 import GuessCharacter, { GuessCharacterColor } from './GuessCharacter';
 
 export default class Guess {
@@ -26,7 +27,7 @@ export default class Guess {
 	}
 
 	submit(targetWord: string) {
-		if (this._characterCount < 5) {
+		if (this._characterCount < 5 || !dictionary.includes(this.characters.map(c => c.value).join(""))) {
 			return false;
 		}
 

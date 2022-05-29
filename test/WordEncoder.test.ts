@@ -1,11 +1,8 @@
+import dictionary from "../src/dictionary";
 import WordEncoder from "../src/WordEncoder";
 
 describe("WordEncoder", () => {
-	const randomWords = Array.from({ length: 1000 }).map(() =>
-		Array.from({ length: 5 }).map(() => String.fromCharCode(Math.floor((Math.random() * 25) + 97))).join("")
-	);
-
-	it.each(randomWords)(
+	it.each(dictionary)(
 		"obscures every character in %s",
 		word => {
 			const encodedWord = WordEncoder.encode(word);
@@ -13,7 +10,7 @@ describe("WordEncoder", () => {
 		}
 	);
 
-	it.each(randomWords)(
+	it.each(dictionary)(
 		"can encode and decode %s",
 		word => expect(WordEncoder.decode(WordEncoder.encode(word))).toBe(word)
 	);

@@ -1,16 +1,41 @@
 import Guess from "../src/Guess";
 import { GuessCharacterColor } from "../src/GuessCharacter";
 
-describe("Guess", () => {
-	it('properly colors a guess of "geode" against "gooey"', () => {
-		const guess = new Guess();
-		[..."geode"].forEach(character => guess.addCharacter(character));
-		guess.submit("gooey");
+class GuessTestCase {
+	guess: string;
+	target: string;
+	colors: GuessCharacterColor[];
 
-		expect(guess.characters[0].color).toBe(GuessCharacterColor.Green);
-		expect(guess.characters[1].color).toBe(GuessCharacterColor.Yellow);
-		expect(guess.characters[2].color).toBe(GuessCharacterColor.Green);
-		expect(guess.characters[3].color).toBe(GuessCharacterColor.Gray);
-		expect(guess.characters[4].color).toBe(GuessCharacterColor.Gray);
+	constructor(guess: string, target: string, colors: number[]) {
+		this.guess = guess;
+		this.target = target;
+		this.colors = colors.map(colorCode => {
+			switch (colorCode) {
+				case 2:
+					return GuessCharacterColor.Green;
+				case 1:
+					return GuessCharacterColor.Yellow;
+				default:
+					return GuessCharacterColor.Gray;
+			}
+		});
+	}
+}
+
+describe("Guess", () => {
+	const testCases = [
+		new GuessTestCase("geode", "gooey", [2, 1, 2, 0, 0]),
+		new GuessTestCase("types", "types", [2, 2, 2, 2, 2]),
+		new GuessTestCase("sloth", "penny", [0, 0, 0, 0, 0]),
+	];
+
+	testCases.forEach(testCase => {
+		it(`properly colors a guess of "${testCase.guess}" against "${testCase.target}"`, () => {
+			const guess = new Guess();
+			[...testCase.guess].forEach(character => guess.addCharacter(character));
+			guess.submit(testCase.target);
+
+			testCase.colors.forEach((color, index) => expect(guess.characters[index].color).toBe(color));
+		});
 	});
 });

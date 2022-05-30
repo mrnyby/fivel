@@ -54,6 +54,7 @@ export default class Guess {
 				guessCharacter.color = GuessCharacterColor.Green;
 			} else if (unguessedCharacterCounts[guessCharacter.value] > 0) {
 				guessCharacter.color = GuessCharacterColor.Yellow;
+				unguessedCharacterCounts[guessCharacter.value]--;
 			}
 		});
 

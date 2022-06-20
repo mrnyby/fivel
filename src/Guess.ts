@@ -6,9 +6,14 @@ export default class Guess {
 
 	private _characterCount = 0;
 	private _isSubmitted = false;
+	private _isValid = true;
 
 	public get isSubmitted() {
 		return this._isSubmitted;
+	}
+
+	public get isValid() {
+		return this._isValid;
 	}
 
 	addCharacter(character: string) {
@@ -16,6 +21,7 @@ export default class Guess {
 			return;
 		}
 
+		this._isValid = true;
 		this.characters[this._characterCount++].value = character;
 	}
 
@@ -23,12 +29,17 @@ export default class Guess {
 		if (this._characterCount === 0) {
 			return;
 		}
+
+		this._isValid = true;
 		this.characters[this._characterCount-- - 1].value = '';
 	}
 
 	submit(targetWord: string) {
 		if (this._characterCount < 5 || !dictionary.includes(this.characters.map(c => c.value).join(""))) {
+			this._isValid = false;
 			return false;
+		} else {
+			this._isValid = true;
 		}
 
 		this._isSubmitted = true;

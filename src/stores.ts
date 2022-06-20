@@ -19,12 +19,20 @@ const _createGuesses = () => {
 			return guesses;
 		}),
 		submitGuess: () => update(guesses => {
-			if (guesses[nGuesses].submit(WordEncoder.decode(get(encodedTargetWord)))) {
+			if (!get(isGameOver) && guesses[nGuesses].submit(WordEncoder.decode(get(encodedTargetWord)))) {
 				guesses[nGuesses].characters.forEach(guessCharacter => {
 					keyColors.setKeyColor(guessCharacter.value, guessCharacter.color);
 				})
 
+				const guessIsCorrect = guesses[nGuesses].characters.every(
+					character => character.color === GuessCharacterColor.Green
+				);
+
 				nGuesses++;
+
+				if (nGuesses > 5 || guessIsCorrect) {
+					isGameOver.set(true);
+				}
 			}
 
 			return guesses;
@@ -70,4 +78,5 @@ const _urlParams = new URLSearchParams(window.location.search);
 export const encodedTargetWord = readable(_urlParams.get("id"));
 export const guesses = _createGuesses();
 export const isGameSet = readable(_urlParams.get("id") !== null);
+export const isGameOver = writable(false);
 export const keyColors = _createKeyColors();

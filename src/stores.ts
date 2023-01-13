@@ -70,7 +70,7 @@ const _createKeyColors = () => {
 			return keyColors;
 		}),
 		subscribe,
-	}
+	};
 };
 
 const _urlParams = new URLSearchParams(window.location.search);

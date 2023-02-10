@@ -1,5 +1,6 @@
 import { get, readable, writable } from "svelte/store";
 
+import { GameStatus } from "./GameStatus";
 import Guess from "./Guess";
 import { GuessCharacterColor } from "./GuessCharacter";
 import WordEncoder from "./WordEncoder";
@@ -19,20 +20,19 @@ const _createGuesses = () => {
 			return guesses;
 		}),
 		submitGuess: () => update(guesses => {
-			if (!get(isGameOver) && guesses[nGuesses].submit(WordEncoder.decode(get(encodedTargetWord)))) {
+			if (
+				get(gameStatus) !== GameStatus.Post
+				&& guesses[nGuesses].submit(get(targetWord))
+			) {
 				guesses[nGuesses].characters.forEach(guessCharacter => {
 					keyColors.setKeyColor(guessCharacter.value, guessCharacter.color);
-				})
+				});
 
-				const guessIsCorrect = guesses[nGuesses].characters.every(
-					character => character.color === GuessCharacterColor.Green
-				);
+				if (nGuesses >= 5 || guesses[nGuesses].isCorrect()) {
+					gameStatus.set(GameStatus.Post);
+				}
 
 				nGuesses++;
-
-				if (nGuesses > 5 || guessIsCorrect) {
-					isGameOver.set(true);
-				}
 			}
 
 			return guesses;
@@ -75,8 +75,7 @@ const _createKeyColors = () => {
 
 const _urlParams = new URLSearchParams(window.location.search);
 
-export const encodedTargetWord = readable(_urlParams.get("id"));
+export const gameStatus = writable(_urlParams.get("id") == null ? GameStatus.Pre : GameStatus.Peri);
 export const guesses = _createGuesses();
-export const isGameSet = readable(_urlParams.get("id") !== null);
-export const isGameOver = writable(false);
 export const keyColors = _createKeyColors();
+export const targetWord = readable(WordEncoder.decode(_urlParams.get("id")));

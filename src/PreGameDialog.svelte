@@ -1,6 +1,7 @@
 <script lang="ts">
 	import dictionary from "./dictionary";
-	import { isGameSet } from "./stores";
+    import { GameStatus } from "./GameStatus";
+	import { gameStatus } from "./stores";
 	import WordEncoder from "./WordEncoder";
 
 	let errorMessage = "";
@@ -36,7 +37,7 @@
 	};
 </script>
 
-{#if !$isGameSet}
+{#if $gameStatus === GameStatus.Pre}
 	<div class=dialog-overlay>
 		<dialog open>
 			<h1>Create a Puzzle</h1>
@@ -81,14 +82,6 @@
 		outline-color: var(--color-dark-gray);
 	}
 
-	dialog {
-		border: none;
-		border-radius: 4px;
-
-		display: flex;
-		flex-direction: column;
-	}
-
 	h1 {
 		align-self: center;
 		margin-top: 0;
@@ -107,19 +100,6 @@
 	input:focus {
 		border-color: transparent;
 		outline-color: var(--color-dark-gray);
-	}
-
-	.dialog-overlay {
-		background: rgba(0, 0, 0, 0.3);
-
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-
-		display: flex;
-		align-items: center;
 	}
 
 	.error {

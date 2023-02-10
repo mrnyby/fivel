@@ -1,7 +1,7 @@
 export enum GuessCharacterColor {
 	Gray,
-	Yellow,
 	Green,
+	Yellow,
 }
 
 export default class GuessCharacter {

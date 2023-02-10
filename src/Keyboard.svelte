@@ -1,13 +1,14 @@
 <script lang="ts">
 	import { get } from "svelte/store";
+    import { GameStatus } from "./GameStatus";
 
 	import { GuessCharacterColor } from "./GuessCharacter";
-	import { guesses, isGameOver, keyColors } from "./stores";
+	import { gameStatus, guesses, keyColors } from "./stores";
 
 	const handleKeyClick = (event: Event) => {
 		const eventElement = event.target as HTMLElement;
 
-		if (!eventElement.matches("button") || get(isGameOver)) {
+		if (!eventElement.matches("button") || get(gameStatus) === GameStatus.Post) {
 			return;
 		}
 

@@ -1,13 +1,15 @@
 <script lang="ts">
 	import GuessGrid from "./GuessGrid.svelte";
 	import Keyboard from "./Keyboard.svelte";
-	import NewGameDialog from "./NewGameDialog.svelte";
+	import PostGameDialog from "./PostGameDialog.svelte";
+	import PreGameDialog from "./PreGameDialog.svelte";
 </script>
 
 <main>
 	<GuessGrid />
 	<Keyboard />
-	<NewGameDialog />
+	<PreGameDialog />
+	<PostGameDialog />
 </main>
 
 <style>

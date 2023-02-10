@@ -34,6 +34,11 @@ export default class Guess {
 		this.characters[this._characterCount-- - 1].value = '';
 	}
 
+	isCorrect() {
+		return this._characterCount === 5
+			&& this.characters.every(character => character.color === GuessCharacterColor.Green);
+	}
+
 	submit(targetWord: string) {
 		if (this._characterCount < 5 || !dictionary.includes(this.characters.map(c => c.value).join(""))) {
 			this._isValid = false;

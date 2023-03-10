@@ -6,7 +6,7 @@
 {#if $gameStatus === GameStatus.Post}
 	<div class=dialog-overlay>
 		<dialog open>
-			{#if $guesses.at(-1).isCorrect()}
+			{#if $guesses.find(guess => guess.isCorrect()) !== undefined}
 				<h1>Nice!</h1>
 				<span>Winner!</span>
 			{:else}

@@ -3,6 +3,10 @@ namespace WordEncoder {
 	const _shiftDistances = [11, 13, 17, 19, 23];
 
 	export const decode = (word: string) => {
+		if (word === null) {
+			return "";
+		}
+
 		return [...word.toLowerCase()]
 			.map((character, index) => _unshiftCharacter(character, _shiftDistances[index]))
 			.join("");

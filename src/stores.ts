@@ -75,7 +75,7 @@ const _createKeyColors = () => {
 
 const _urlParams = new URLSearchParams(window.location.search);
 
-export const gameStatus = writable(_urlParams.get("id") == null ? GameStatus.Pre : GameStatus.Peri);
+export const gameStatus = writable(_urlParams.get("id") === null ? GameStatus.Pre : GameStatus.Peri);
 export const guesses = _createGuesses();
 export const keyColors = _createKeyColors();
 export const targetWord = readable(WordEncoder.decode(_urlParams.get("id")));

@@ -1,3 +1,5 @@
+import { describe, expect, it } from "vitest";
+
 import Guess from "../src/Guess";
 import { GuessCharacterColor } from "../src/GuessCharacter";
 

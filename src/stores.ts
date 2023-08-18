@@ -1,4 +1,4 @@
-import { get, readable, writable } from "svelte/store";
+import { derived, get, readable, writable } from "svelte/store";
 
 import { GameStatus } from "./GameStatus";
 import Guess from "./Guess";
@@ -77,5 +77,6 @@ const _urlParams = new URLSearchParams(window.location.search);
 
 export const gameStatus = writable(_urlParams.get("id") === null ? GameStatus.Pre : GameStatus.Peri);
 export const guesses = _createGuesses();
+export const guessIsCorrect = derived(guesses, ($guesses) => $guesses.find(guess => guess.isCorrect()) !== undefined);
 export const keyColors = _createKeyColors();
 export const targetWord = readable(WordEncoder.decode(_urlParams.get("id")));

@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Dialog from "./Dailog/Dialog.svelte";
 	import dictionary from "./dictionary";
     import { GameStatus } from "./GameStatus";
 	import { gameStatus } from "./stores";
@@ -37,29 +38,24 @@
 	};
 </script>
 
-{#if $gameStatus === GameStatus.Pre}
-	<div class=dialog-overlay>
-		<dialog open>
-			<h1>Create a Puzzle</h1>
-			<label for=word>Enter a five-letter word</label>
-			<div class=input-group>
-				<input id=word autocomplete=off bind:value={word} maxlength=5>
-				<button on:click={handleSubmit}>
-					<span class=material-icons>add_link</span>
-				</button>
-			</div>
-			<span class=result class:error={errorMessage.length > 0}>
-				{#if errorMessage.length > 0}
-					{errorMessage}
-				{:else if link.length > 0}
-					<a href={link}>{link}</a>
-				{:else}
-					&nbsp;
-				{/if}
-			</span>
-		</dialog>
+<Dialog visible={$gameStatus === GameStatus.Pre} title="Create a Puzzle">
+	<label for=word>Enter a five-letter word</label>
+	<div class=input-group>
+		<input id=word autocomplete=off bind:value={word} maxlength=5>
+		<button on:click={handleSubmit}>
+			<span class=material-icons>add_link</span>
+		</button>
 	</div>
-{/if}
+	<span class=result class:error={errorMessage.length > 0}>
+		{#if errorMessage.length > 0}
+			{errorMessage}
+		{:else if link.length > 0}
+			<a href={link}>{link}</a>
+		{:else}
+			&nbsp;
+		{/if}
+	</span>
+</Dialog>
 
 <style>
 	button {
@@ -80,11 +76,6 @@
 	button:focus {
 		border-color: transparent;
 		outline-color: var(--color-dark-gray);
-	}
-
-	h1 {
-		align-self: center;
-		margin-top: 0;
 	}
 
 	input {

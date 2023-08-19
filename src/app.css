@@ -31,11 +31,6 @@ button {
 	text-transform: uppercase;
 }
 
-button.primary {
-	background: var(--color-dark-gray);
-	color: #ffffff;
-}
-
 html {
 	height: 100%;
 }

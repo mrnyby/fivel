@@ -1,7 +1,4 @@
 <script lang="ts">
-	import DialogAction from "./DialogAction";
-
-	export let actions: DialogAction[] = [];
 	export let title: string;
 	export let visible: boolean;
 
@@ -16,15 +13,6 @@
 		<dialog on:click={(event) => event.stopPropagation()} on:keypress={(event) => event.stopPropagation()} open>
 			<h1>{title}</h1>
 			<slot></slot>
-			{#if actions.length !== 0}
-				<div class="dialog-actions">
-					{#each actions as action}
-						<button on:click={handleClick} class={action.className}>
-							{action.text}
-						</button>
-					{/each}
-				</div>
-			{/if}
 		</dialog>
 	</div>
 {/if}
@@ -42,10 +30,6 @@
 	h1 {
 		align-self: center;
 		margin-top: 0;
-	}
-
-	.dialog-actions {
-		margin: 32px 0 0 auto;
 	}
 
 	.dialog-overlay {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Dialog from "./Dailog/Dialog.svelte";
+	import Dialog from "./Dialog.svelte";
 	import dictionary from "./dictionary";
     import { GameStatus } from "./GameStatus";
 	import { gameStatus } from "./stores";

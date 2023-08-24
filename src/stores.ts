@@ -45,25 +45,25 @@ const _createKeyColors = () => {
 	const { subscribe, update } = writable(
 		[..."abcdefghijklmnopqrstuvwxyz"]
 			.reduce((accumulator, key) => {
-				accumulator[key] = null;
+				accumulator.set(key, null);
 				return accumulator;
-			}, {})
+			}, new Map<string, GuessCharacterColor | null>())
 	);
 
 	return {
 		setKeyColor: (key: string, color: GuessCharacterColor) => update(keyColors => {
 			switch (color) {
 				case GuessCharacterColor.Green:
-					keyColors[key] = color;
+					keyColors.set(key, color);
 					break;
 				case GuessCharacterColor.Yellow:
-					if (keyColors[key] !== GuessCharacterColor.Green) {
-						keyColors[key] = color;
+					if (keyColors.get(key) !== GuessCharacterColor.Green) {
+						keyColors.set(key, color);
 					}
 					break;
 				case GuessCharacterColor.Gray:
-					if (keyColors[key] !== GuessCharacterColor.Green && keyColors[key] !== GuessCharacterColor.Yellow) {
-						keyColors[key] = color;
+					if (keyColors.get(key) !== GuessCharacterColor.Green && keyColors.get(key) !== GuessCharacterColor.Yellow) {
+						keyColors.set(key, color);
 					}
 			}
 

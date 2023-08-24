@@ -39,14 +39,14 @@
 </script>
 
 <Dialog visible={$gameStatus === GameStatus.Pre} title="Create a Puzzle">
-	<label for=word>Enter a five-letter word</label>
-	<div class=input-group>
-		<input id=word autocomplete=off bind:value={word} maxlength=5>
+	<label for="word">Enter a five-letter word</label>
+	<div class="input-group">
+		<input id="word" autocomplete="off" bind:value={word} maxlength="5">
 		<button on:click={handleSubmit}>
-			<span class=material-icons>add_link</span>
+			<span class="material-icons">add_link</span>
 		</button>
 	</div>
-	<span class=result class:error={errorMessage.length > 0}>
+	<span class="result" class:error={errorMessage.length > 0}>
 		{#if errorMessage.length > 0}
 			{errorMessage}
 		{:else if link.length > 0}

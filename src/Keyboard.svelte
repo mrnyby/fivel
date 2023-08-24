@@ -21,7 +21,9 @@
 				guesses.deleteCharacter();
 				break;
 			default:
-				guesses.addCharacter(key);
+				if (key !== undefined) {
+					guesses.addCharacter(key);
+				}
 		}
 	};
 </script>
@@ -31,9 +33,9 @@
 	<div class="row">
 		{#each [..."qwertyuiop"] as key}
 			<button
-				class:gray={$keyColors[key] === GuessCharacterColor.Gray}
-				class:green={$keyColors[key] === GuessCharacterColor.Green}
-				class:yellow={$keyColors[key] === GuessCharacterColor.Yellow}
+				class:gray={$keyColors.get(key) === GuessCharacterColor.Gray}
+				class:green={$keyColors.get(key) === GuessCharacterColor.Green}
+				class:yellow={$keyColors.get(key) === GuessCharacterColor.Yellow}
 				data-key={key}
 			>
 				{key}
@@ -44,9 +46,9 @@
 		<div class="spacer" />
 		{#each [..."asdfghjkl"] as key}
 			<button
-				class:gray={$keyColors[key] === GuessCharacterColor.Gray}
-				class:green={$keyColors[key] === GuessCharacterColor.Green}
-				class:yellow={$keyColors[key] === GuessCharacterColor.Yellow}
+				class:gray={$keyColors.get(key) === GuessCharacterColor.Gray}
+				class:green={$keyColors.get(key) === GuessCharacterColor.Green}
+				class:yellow={$keyColors.get(key) === GuessCharacterColor.Yellow}
 				data-key={key}
 			>
 				{key}
@@ -58,9 +60,9 @@
 		<button data-key="enter">enter</button>
 		{#each [..."zxcvbnm"] as key}
 			<button
-				class:gray={$keyColors[key] === GuessCharacterColor.Gray}
-				class:green={$keyColors[key] === GuessCharacterColor.Green}
-				class:yellow={$keyColors[key] === GuessCharacterColor.Yellow}
+				class:gray={$keyColors.get(key) === GuessCharacterColor.Gray}
+				class:green={$keyColors.get(key) === GuessCharacterColor.Green}
+				class:yellow={$keyColors.get(key) === GuessCharacterColor.Yellow}
 				data-key={key}
 			>
 				{key}

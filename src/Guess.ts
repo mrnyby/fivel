@@ -31,7 +31,7 @@ export default class Guess {
 		}
 
 		this._isValid = true;
-		this.characters[this._characterCount-- - 1].value = '';
+		this.characters[this._characterCount-- - 1].value = "";
 	}
 
 	isCorrect() {
@@ -76,4 +76,4 @@ export default class Guess {
 
 		return true;
 	}
-}
+};

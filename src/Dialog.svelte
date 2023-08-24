@@ -11,6 +11,9 @@
 	<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 	<div on:click={handleClick} on:keypress={handleClick} class="dialog-overlay" role="dialog">
 		<dialog on:click={(event) => event.stopPropagation()} on:keypress={(event) => event.stopPropagation()} open>
+			<button on:click={handleClick}>
+				<span class="material-icons">close</span>
+			</button>
 			<h1>{title}</h1>
 			<slot></slot>
 		</dialog>
@@ -18,6 +21,14 @@
 {/if}
 
 <style>
+	button {
+		background: none;
+
+		position: absolute;
+		top: 0;
+		right: -8px;
+	}
+
 	dialog {
 		border: none;
 		border-radius: 4px;

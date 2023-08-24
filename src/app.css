@@ -33,6 +33,15 @@ button {
 	text-transform: uppercase;
 }
 
+h1 {
+	align-self: center;
+	margin-top: 0;
+}
+
+h1.a-winner-is-you {
+	margin-top: 8px;
+}
+
 html {
 	height: 100%;
 }

@@ -39,15 +39,6 @@
 		flex-direction: column;
 	}
 
-	h1 {
-		align-self: center;
-		margin-top: 0;
-	}
-
-	h1.a-winner-is-you {
-		margin-top: 8px;
-	}
-
 	.dialog-overlay {
 		background: rgba(0, 0, 0, 0.3);
 

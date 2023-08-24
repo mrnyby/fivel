@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let title: string;
+	export let titleClass = "";
 	export let visible: boolean;
 
 	let isDismissed = false;
@@ -14,7 +15,7 @@
 			<button on:click={handleClick}>
 				<span class="material-icons">close</span>
 			</button>
-			<h1>{title}</h1>
+			<h1 class={titleClass}>{title}</h1>
 			<slot></slot>
 		</dialog>
 	</div>
@@ -41,6 +42,10 @@
 	h1 {
 		align-self: center;
 		margin-top: 0;
+	}
+
+	h1.a-winner-is-you {
+		margin-top: 8px;
 	}
 
 	.dialog-overlay {

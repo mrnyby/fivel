@@ -6,6 +6,8 @@
 	--color-red: #ef5350;
 	--color-yellow: #ffca28;
 	--color-green: #66bb6a;
+	--color-blue: #1c7cdc;
+	--color-violet: #a855df;
 }
 
 * {
@@ -33,4 +35,120 @@ button {
 
 html {
 	height: 100%;
+}
+
+@keyframes move {
+	0% {
+		transform: translate(0, 0);
+	}
+	40% {
+		transform: translate(-8px, -8px);
+	}
+	50% {
+		transform: translate(-8px, -8px);
+	}
+	60% {
+		transform: translate(-8px, -8px);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+}
+
+@keyframes shadows {
+	0% {
+		text-shadow: none;
+	}
+	10% {
+		text-shadow: 2px 2px 0 var(--color-yellow);
+	}
+	20% {
+		text-shadow:
+			2px 2px 0 var(--color-yellow),
+			4px 4px 0 var(--color-green);
+	}
+	30% {
+		text-shadow:
+			2px 2px 0 var(--color-yellow),
+			4px 4px 0 var(--color-green),
+			6px 6px var(--color-blue);
+	}
+	40% {
+		text-shadow:
+			2px 2px 0 var(--color-yellow),
+			4px 4px 0 var(--color-green),
+			6px 6px var(--color-blue),
+			8px 8px 0 var(--color-violet);
+	}
+	50% {
+		text-shadow:
+			2px 2px 0 var(--color-yellow),
+			4px 4px 0 var(--color-green),
+			6px 6px var(--color-blue),
+			8px 8px 0 var(--color-violet);
+	}
+	60% {
+		text-shadow:
+			2px 2px 0 var(--color-yellow),
+			4px 4px 0 var(--color-green),
+			6px 6px var(--color-blue),
+			8px 8px 0 var(--color-violet);
+	}
+	70% {
+		text-shadow:
+			2px 2px 0 var(--color-yellow),
+			4px 4px 0 var(--color-green),
+			6px 6px var(--color-blue);
+	}
+	80% {
+		text-shadow:
+			2px 2px 0 var(--color-yellow),
+			4px 4px 0 var(--color-green);
+	}
+	90% {
+		text-shadow: 2px 2px 0 var(--color-yellow);
+	}
+	100% {
+		text-shadow: none;
+	}
+}
+
+.a-winner-is-you {
+	animation: shadows 1.2s ease-in infinite, move 1.2s ease-in infinite;
+	color: var(--color-red);
+	text-shadow:
+		2px 2px 0 var(--color-yellow),
+		4px 4px 0 var(--color-green),
+		6px 6px var(--color-blue),
+		8px 8px 0 var(--color-violet);
+}
+
+.guess-cell {
+	border: 2px solid var(--color-light-gray);
+	border-radius: 4px;
+	box-sizing: border-box;
+	font-size: 32px;
+	height: 64px;
+	text-transform: uppercase;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.guess-grid {
+	display: grid;
+	gap: 4px;
+	grid-template-columns: repeat(5, 64px);
+}
+
+.submitted {
+	background: var(--color-gray);
+	border-color: var(--color-gray);
+	color: #ffffff;
+}
+
+.submitted.green {
+	background: var(--color-green);
+	border-color: var(--color-green);
 }

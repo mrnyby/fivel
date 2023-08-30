@@ -7,25 +7,25 @@
 </script>
 
 <nav>
-	<button title="Create a new game" on:click={handleClick}>
-		<span class="material-icons">add</span>
-	</button>
+	<button title="Create a new game" on:click={handleClick}>New Game</button>
 </nav>
 
 <style>
 	nav {
-		align-self: flex-start;
 		margin-bottom: 16px;
-		max-width: 512px;
 	}
 
 	nav button {
 		background: none;
+		color: var(--color-dark-gray);
+		cursor: pointer;
+		font-size: 0.8em;
 		margin: 0;
 		padding: 0;
-	}
+		text-decoration: underline;
+		text-transform: none;
 
-	nav button span {
-		font-size: 2em;
+		display: flex;
+		align-items: center;
 	}
 </style>

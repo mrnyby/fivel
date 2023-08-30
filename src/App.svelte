@@ -19,7 +19,7 @@
 	main {
 		box-sizing: border-box;
 		height: 100%;
-		padding: 32px;
+		padding: 16px;
 
 		display: flex;
 		align-items: center;

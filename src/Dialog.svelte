@@ -1,14 +1,16 @@
 <script lang="ts">
+    import type { Writable } from "svelte/store";
+
+	export let isVisibleStore: Writable<boolean>;
 	export let title: string;
 	export let titleClass = "";
-	export let visible: boolean;
 
-	let isDismissed = false;
-
-	const handleClick = () => isDismissed = true;
+	const handleClick = () => {
+		isVisibleStore.set(false);
+	};
 </script>
 
-{#if visible && !isDismissed}
+{#if $isVisibleStore}
 	<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
 	<div on:click={handleClick} on:keypress={handleClick} class="dialog-overlay" role="dialog">
 		<dialog on:click={(event) => event.stopPropagation()} on:keypress={(event) => event.stopPropagation()} open>

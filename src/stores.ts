@@ -1,6 +1,5 @@
 import { derived, get, readable, writable } from "svelte/store";
 
-import { GameStatus } from "./GameStatus";
 import Guess from "./Guess";
 import { GuessCharacterColor } from "./GuessCharacter";
 import WordEncoder from "./WordEncoder";
@@ -21,7 +20,7 @@ const _createGuesses = () => {
 		}),
 		submitGuess: () => update(guesses => {
 			if (
-				get(gameStatus) !== GameStatus.Post
+				!get(guessesAreExhausted)
 				&& guesses[nGuesses].submit(get(targetWord))
 			) {
 				guesses[nGuesses].characters.forEach(guessCharacter => {
@@ -29,7 +28,7 @@ const _createGuesses = () => {
 				});
 
 				if (nGuesses >= 5 || guesses[nGuesses].isCorrect()) {
-					gameStatus.set(GameStatus.Post);
+					postGameDialogIsVisible.set(true);
 				}
 
 				nGuesses++;
@@ -75,8 +74,11 @@ const _createKeyColors = () => {
 
 const _urlParams = new URLSearchParams(window.location.search);
 
-export const gameStatus = writable(_urlParams.get("id") === null ? GameStatus.Pre : GameStatus.Peri);
 export const guesses = _createGuesses();
+export const guessesAreExhausted = derived(guesses, ($guesses) => $guesses.every(guess => guess.isSubmitted));
 export const guessIsCorrect = derived(guesses, ($guesses) => $guesses.find(guess => guess.isCorrect()) !== undefined);
 export const keyColors = _createKeyColors();
 export const targetWord = readable(WordEncoder.decode(_urlParams.get("id")));
+
+export const createGameDialogIsVisible = writable(_urlParams.get("id") === null);
+export const postGameDialogIsVisible = writable(false);

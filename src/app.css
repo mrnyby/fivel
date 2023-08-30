@@ -2,6 +2,7 @@
 	--color-gray: #bbbbbb;
 	--color-dark-gray: #444444;
 	--color-light-gray: #dddddd;
+	--color-white: #ffffff;
 
 	--color-red: #ef5350;
 	--color-yellow: #ffca28;
@@ -154,7 +155,7 @@ html {
 .submitted {
 	background: var(--color-gray);
 	border-color: var(--color-gray);
-	color: #ffffff;
+	color: var(--color-white);
 }
 
 .submitted.green {

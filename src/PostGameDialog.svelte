@@ -1,11 +1,10 @@
 <script lang="ts">
     import Dialog from "./Dialog.svelte";
-	import { GameStatus } from "./GameStatus";
-	import { gameStatus, guesses, guessIsCorrect, targetWord } from "./stores";
+	import { guesses, guessIsCorrect, postGameDialogIsVisible, targetWord } from "./stores";
 </script>
 
 <Dialog
-	visible={$gameStatus === GameStatus.Post}
+	isVisibleStore={postGameDialogIsVisible}
 	title={$guessIsCorrect ? "Winner!" : "Loser!"}
 	titleClass={$guessIsCorrect ? "a-winner-is-you" : ""}
 >

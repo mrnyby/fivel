@@ -1,14 +1,11 @@
 <script lang="ts">
-	import { get } from "svelte/store";
-    import { GameStatus } from "./GameStatus";
-
 	import { GuessCharacterColor } from "./GuessCharacter";
-	import { gameStatus, guesses, keyColors } from "./stores";
+	import { guesses, guessesAreExhausted, keyColors, targetWord } from "./stores";
 
 	const handleKeyClick = (event: Event) => {
 		const eventElement = event.target as HTMLElement;
 
-		if (!eventElement.matches("button") || get(gameStatus) === GameStatus.Post) {
+		if (!eventElement.matches("button") || $targetWord === "" || $guessesAreExhausted) {
 			return;
 		}
 

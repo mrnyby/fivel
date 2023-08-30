@@ -1,8 +1,7 @@
 <script lang="ts">
 	import Dialog from "./Dialog.svelte";
 	import dictionary from "./dictionary";
-    import { GameStatus } from "./GameStatus";
-	import { gameStatus } from "./stores";
+	import { createGameDialogIsVisible } from "./stores";
 	import WordEncoder from "./WordEncoder";
 
 	let errorMessage = "";
@@ -38,7 +37,7 @@
 	};
 </script>
 
-<Dialog visible={$gameStatus === GameStatus.Pre} title="Create a Puzzle">
+<Dialog isVisibleStore={createGameDialogIsVisible} title="Create a Puzzle">
 	<label for="word">Enter a five-letter word</label>
 	<div class="input-group">
 		<input id="word" autocomplete="off" bind:value={word} maxlength="5">

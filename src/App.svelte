@@ -1,14 +1,17 @@
 <script lang="ts">
+	import CreateGameDialog from "./CreateGameDialog.svelte";
 	import GuessGrid from "./GuessGrid.svelte";
 	import Keyboard from "./Keyboard.svelte";
 	import PostGameDialog from "./PostGameDialog.svelte";
-	import PreGameDialog from "./PreGameDialog.svelte";
+    import TopNav from "./TopNav.svelte";
 </script>
 
 <main>
+	<TopNav />
 	<GuessGrid />
+	<div class="spacer"></div>
 	<Keyboard />
-	<PreGameDialog />
+	<CreateGameDialog />
 	<PostGameDialog />
 </main>
 
@@ -21,6 +24,9 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
-		justify-content: space-between;
+	}
+
+	.spacer {
+		flex-grow: 1;
 	}
 </style>

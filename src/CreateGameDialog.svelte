@@ -26,7 +26,7 @@
 			return;
 		}
 
-		link = `${window.location.href}?id=${WordEncoder.encode(lowerCaseWord)}`;
+		link = `${window.location.href.split("?")[0]}?id=${WordEncoder.encode(lowerCaseWord)}`;
 		// TODO: Auto-copy to clipboard
 		// navigator.clipboard.writeText(link).then(() => {
 		// 	isCopySuccessVisible = true;

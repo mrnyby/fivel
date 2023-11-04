@@ -152,6 +152,16 @@ html {
 	grid-template-columns: repeat(5, 64px);
 }
 
+.link-button {
+	background: none;
+	cursor: pointer;
+	font-size: 0.8em;
+	margin: 0;
+	padding: 0;
+	text-decoration: underline;
+	text-transform: none;
+}
+
 .submitted {
 	background: var(--color-gray);
 	border-color: var(--color-gray);

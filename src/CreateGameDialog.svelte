@@ -5,12 +5,12 @@
 	import WordEncoder from "./WordEncoder";
 
 	let errorMessage = "";
+	let isPopoverOpen = false;
 	let link = "";
+	let popoverTimeout: NodeJS.Timeout;
 	let word = "";
 
-	const handleSubmit = (event: Event) => {
-		event.preventDefault();
-
+	const handleClick = () => {
 		errorMessage = "";
 		link = "";
 
@@ -27,22 +27,23 @@
 		}
 
 		link = `${window.location.href.split("?")[0]}?id=${WordEncoder.encode(lowerCaseWord)}`;
-		// TODO: Auto-copy to clipboard
-		// navigator.clipboard.writeText(link).then(() => {
-		// 	isCopySuccessVisible = true;
-		// 	setTimeout(() => {
-		// 		isCopySuccessVisible = false;
-		// 	}, 4000);
-		// });
+		navigator.clipboard.writeText(link).then(() => {
+			isPopoverOpen = true;
+			clearTimeout(popoverTimeout);
+			popoverTimeout = setTimeout(() => isPopoverOpen = false, 3000);
+		});
 	};
 </script>
 
 <Dialog isVisibleStore={createGameDialogIsVisible} title="Create a Puzzle">
-	<label for="word">Enter a five-letter word</label>
+	<label for="word">Enter a five-letter word, then share the link!</label>
 	<div class="input-group">
 		<input id="word" autocomplete="off" bind:value={word} maxlength="5">
-		<button on:click={handleSubmit}>
+		<button on:click={handleClick}>
 			<span class="material-icons">add_link</span>
+			{#if isPopoverOpen}
+				<span class="popover">Copied to clipboard</span>
+			{/if}
 		</button>
 	</div>
 	<span class="result" class:error={errorMessage.length > 0}>
@@ -65,6 +66,7 @@
 		margin: 0;
 		outline: 1px solid transparent;
 		padding: 0 4px;
+		position: relative;
 		transition: all linear 0.1s;
 
 		display: flex;

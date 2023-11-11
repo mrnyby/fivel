@@ -155,11 +155,35 @@ html {
 .link-button {
 	background: none;
 	cursor: pointer;
-	font-size: 0.8em;
 	margin: 0;
 	padding: 0;
 	text-decoration: underline;
 	text-transform: none;
+}
+
+.popover {
+	background: var(--color-green);
+	border-radius: 4px;
+	color: var(--color-white);
+	padding: 2px 4px;
+	cursor: default;
+	text-transform: none;
+	white-space: nowrap;
+
+	position: absolute;
+	top: -110%;
+}
+
+.popover::after {
+	content: "";
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: var(--color-green) transparent transparent transparent;
+
+	position: absolute;
+	top: 100%;
+	left: 50%;
 }
 
 .submitted {

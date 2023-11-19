@@ -5,7 +5,10 @@
 	import { GuessCharacterColor } from "./GuessCharacter";
 	import { guesses, guessIsCorrect, postGameDialogIsVisible, targetWord } from "./stores";
 
+	let isPopoverOpen = false;
 	let nGuesses = 0;
+	let popoverTimeout: NodeJS.Timeout;
+
 	const unsubscribe = guesses.subscribe((guesses) => {
 		nGuesses = guesses.filter((guess) => guess.isSubmitted).length
 	});
@@ -29,7 +32,12 @@
 					.join("");
 			})
 			.join("<br/>");
-		navigator.clipboard.writeText(`${nGuesses}/6<br/>${guessEmojis}`);
+
+		navigator.clipboard.writeText(`${nGuesses}/6<br/>${guessEmojis}`).then(() => {
+			isPopoverOpen = true;
+			clearTimeout(popoverTimeout);
+			popoverTimeout = setTimeout(() => isPopoverOpen = false, 3000);
+		});
 	};
 </script>
 
@@ -48,7 +56,12 @@
 	{:else}
 		<span class="centered">Better luck next time.</span>
 	{/if}
-	<button on:click={handleClick} class="centered link-button">Copy results</button>
+	<button on:click={handleClick} class="link-button">
+		Copy results
+		{#if isPopoverOpen}
+			<span class="popover">Copied to clipboard</span>
+		{/if}
+	</button>
 </Dialog>
 
 <style>
@@ -70,5 +83,13 @@
 
 	.link-button {
 		margin-top: 8px;
+		position: relative;
+
+		display: flex;
+		justify-content: center;
+	}
+
+	.popover {
+		top: -140%;
 	}
 </style>

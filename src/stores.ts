@@ -80,6 +80,10 @@ export const guessIsCorrect = derived(guesses, $guesses => $guesses.find(guess =
 export const keyColors = _createKeyColors();
 export const nextCharacterIndices = derived(guesses, $guesses => {
 	const nextGuessIndex = $guesses.findIndex(guess => !guess.isSubmitted);
+	if (nextGuessIndex === -1) {
+		return [-1, -1] as [number, number];
+	}
+
 	const nextCharacterIndex = $guesses[nextGuessIndex].characters.findIndex(character => character.value === "");
 	return [nextGuessIndex, nextCharacterIndex] as [number, number];
 });

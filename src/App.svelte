@@ -2,7 +2,6 @@
 	import CreateGameDialog from "./CreateGameDialog.svelte";
 	import GuessGrid from "./GuessGrid.svelte";
 	import Keyboard from "./Keyboard.svelte";
-    import MobileDetection from "./MobileDetection";
 	import PostGameDialog from "./PostGameDialog.svelte";
 	import { guesses, guessesAreExhausted, targetWord } from "./stores";
     import TopNav from "./TopNav.svelte";
@@ -32,10 +31,8 @@
 <main autofocus tabindex="0" on:keydown={handleKeyDown}>
 	<TopNav />
 	<GuessGrid />
-	{#if MobileDetection.isMobile}
-		<div class="spacer"></div>
-		<Keyboard />
-	{/if}
+	<div class="spacer"></div>
+	<Keyboard />
 	<CreateGameDialog />
 	<PostGameDialog />
 </main>

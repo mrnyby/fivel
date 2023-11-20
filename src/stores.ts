@@ -75,9 +75,14 @@ const _createKeyColors = () => {
 const _urlParams = new URLSearchParams(window.location.search);
 
 export const guesses = _createGuesses();
-export const guessesAreExhausted = derived(guesses, ($guesses) => $guesses.every(guess => guess.isSubmitted));
-export const guessIsCorrect = derived(guesses, ($guesses) => $guesses.find(guess => guess.isCorrect()) !== undefined);
+export const guessesAreExhausted = derived(guesses, $guesses => $guesses.every(guess => guess.isSubmitted));
+export const guessIsCorrect = derived(guesses, $guesses => $guesses.find(guess => guess.isCorrect()) !== undefined);
 export const keyColors = _createKeyColors();
+export const nextCharacterIndices = derived(guesses, $guesses => {
+	const nextGuessIndex = $guesses.findIndex(guess => !guess.isSubmitted);
+	const nextCharacterIndex = $guesses[nextGuessIndex].characters.findIndex(character => character.value === "");
+	return [nextGuessIndex, nextCharacterIndex] as [number, number];
+});
 export const targetWord = readable(WordEncoder.decode(_urlParams.get("id")));
 
 export const createGameDialogIsVisible = writable(_urlParams.get("id") === null);

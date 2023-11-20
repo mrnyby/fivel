@@ -25,8 +25,8 @@
 	};
 </script>
 
-<!-- svelte-ignore a11y-no-static-element-interactions -->
-<div class="keyboard" on:click={handleKeyClick} on:keypress={handleKeyClick}>
+<!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
+<div class="keyboard" on:click={handleKeyClick}>
 	<div class="row">
 		{#each [..."qwertyuiop"] as key}
 			<button

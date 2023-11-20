@@ -2,15 +2,40 @@
 	import CreateGameDialog from "./CreateGameDialog.svelte";
 	import GuessGrid from "./GuessGrid.svelte";
 	import Keyboard from "./Keyboard.svelte";
+    import MobileDetection from "./MobileDetection";
 	import PostGameDialog from "./PostGameDialog.svelte";
+	import { guesses, guessesAreExhausted, targetWord } from "./stores";
     import TopNav from "./TopNav.svelte";
+
+	const handleKeyDown = (event: KeyboardEvent) => {
+		if ($targetWord === "" || $guessesAreExhausted) {
+			return;
+		}
+
+		const key = event.key;
+		switch (key) {
+			case "Enter":
+				guesses.submitGuess();
+				break;
+			case "Backspace":
+				guesses.deleteCharacter();
+				break;
+			default:
+				if (/^[a-z]$/i.test(key)) {
+					guesses.addCharacter(key);
+				}
+		}
+	};
 </script>
 
-<main>
+<!-- svelte-ignore a11y-autofocus a11y-no-noninteractive-element-interactions a11y-no-noninteractive-tabindex -->
+<main autofocus tabindex="0" on:keydown={handleKeyDown}>
 	<TopNav />
 	<GuessGrid />
-	<div class="spacer"></div>
-	<Keyboard />
+	{#if MobileDetection.isMobile}
+		<div class="spacer"></div>
+		<Keyboard />
+	{/if}
 	<CreateGameDialog />
 	<PostGameDialog />
 </main>

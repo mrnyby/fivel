@@ -33,12 +33,12 @@
 		}
 
 		50% {
-			border-color: var(--color-dark-gray);
+			border-color: var(--color-gray);
 		}
 	}
 
 	.active {
-		border-color: var(--color-dark-gray);
+		border-color: var(--color-gray);
 	}
 
 	.first {

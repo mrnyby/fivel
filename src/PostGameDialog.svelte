@@ -5,16 +5,25 @@
 	import { GuessCharacterColor } from "./GuessCharacter";
 	import { guesses, guessIsCorrect, postGameDialogIsVisible, targetWord } from "./stores";
 
-	let isPopoverOpen = false;
 	let nGuesses = 0;
-	let popoverTimeout: NodeJS.Timeout;
+
+	let isCopyPopoverOpen = false;
+	let copyPopoverTimeout: NodeJS.Timeout;
+	let isCopyHtmlPopoverOpen = false;
+	let copyHtmlPopoverTimeout: NodeJS.Timeout;
 
 	const unsubscribe = guesses.subscribe((guesses) => {
 		nGuesses = guesses.filter((guess) => guess.isSubmitted).length
 	});
 	onDestroy(unsubscribe);
 
-	const handleClick = () => {
+	const handleCopyClick = () => handleClick();
+
+	const handleCopyHtmlClick = () => handleClick(true);
+
+	const handleClick = (outputHtml = false) => {
+		const separator = outputHtml ? "<br/>" : "\n";
+
 		const guessEmojis = $guesses
 			.filter((guess) => guess.isSubmitted)
 			.map((guess) => {
@@ -31,12 +40,18 @@
 					})
 					.join("");
 			})
-			.join("<br/>");
+			.join(separator);
 
-		navigator.clipboard.writeText(`${nGuesses}/6<br/>${guessEmojis}`).then(() => {
-			isPopoverOpen = true;
-			clearTimeout(popoverTimeout);
-			popoverTimeout = setTimeout(() => isPopoverOpen = false, 3000);
+		navigator.clipboard.writeText(`${nGuesses}/6${separator}${guessEmojis}`).then(() => {
+			if (outputHtml) {
+				isCopyHtmlPopoverOpen = true;
+				clearTimeout(copyHtmlPopoverTimeout);
+				copyHtmlPopoverTimeout = setTimeout(() => isCopyHtmlPopoverOpen = false, 3000);
+			} else {
+				isCopyPopoverOpen = true;
+				clearTimeout(copyPopoverTimeout);
+				copyPopoverTimeout = setTimeout(() => isCopyPopoverOpen = false, 3000);
+			}
 		});
 	};
 </script>
@@ -56,12 +71,21 @@
 	{:else}
 		<span class="centered">Better luck next time.</span>
 	{/if}
-	<button on:click={handleClick} class="link-button">
-		Copy results
-		{#if isPopoverOpen}
-			<span class="popover">Copied to clipboard</span>
-		{/if}
-	</button>
+	<div class="centered">
+		<button class="link-button" on:click={handleCopyClick}>
+			Copy results
+			{#if isCopyPopoverOpen}
+				<span class="popover">Copied to clipboard</span>
+			{/if}
+		</button>
+		|
+		<button class="link-button" on:click={handleCopyHtmlClick}>
+			Copy HTML results
+			{#if isCopyHtmlPopoverOpen}
+				<span class="popover">🍎🦚</span>
+			{/if}
+		</button>
+</div>
 </Dialog>
 
 <style>
@@ -85,7 +109,7 @@
 		margin-top: 8px;
 		position: relative;
 
-		display: flex;
+		display: inline-flex;
 		justify-content: center;
 	}
 

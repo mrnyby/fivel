@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { GuessCharacterColor } from "./GuessCharacter";
-	import { guesses, guessIsCorrect, nextCharacterIndices, targetWord } from "./stores";
+	import { guesses, guessIsCorrect, nextCharacterIndices, targetWord } from "../stores";
+	import { GuessCharacterColor } from "../util/GuessCharacter";
 </script>
 
 <div class="guess-grid">

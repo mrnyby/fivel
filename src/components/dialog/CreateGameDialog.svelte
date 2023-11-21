@@ -1,8 +1,8 @@
 <script lang="ts">
+	import dictionary from "../../dictionary";
+	import { createGameDialogIsVisible } from "../../stores";
+	import WordEncoder from "../../util/WordEncoder";
 	import Dialog from "./Dialog.svelte";
-	import dictionary from "./dictionary";
-	import { createGameDialogIsVisible } from "./stores";
-	import WordEncoder from "./WordEncoder";
 
 	let errorMessage = "";
 	let isPopoverOpen = false;

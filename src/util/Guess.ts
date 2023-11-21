@@ -1,4 +1,4 @@
-import dictionary from "./dictionary";
+import dictionary from "../dictionary";
 import GuessCharacter, { GuessCharacterColor } from "./GuessCharacter";
 
 export default class Guess {

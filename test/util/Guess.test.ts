@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import Guess from "../src/Guess";
-import { GuessCharacterColor } from "../src/GuessCharacter";
+import Guess from "../../src/util/Guess";
+import { GuessCharacterColor } from "../../src/util/GuessCharacter";
 
 class GuessTestCase {
 	guess: string;

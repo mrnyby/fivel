@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
-import dictionary from "../src/dictionary";
-import WordEncoder from "../src/WordEncoder";
+import dictionary from "../../src/dictionary";
+import WordEncoder from "../../src/util/WordEncoder";
 
 describe("WordEncoder", () => {
 	it.each(dictionary)(

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import CreateGameDialog from "./CreateGameDialog.svelte";
+	import { createGameDialogIsVisible, guesses, guessesAreExhausted, targetWord } from "../stores";
+	import CreateGameDialog from "./dialog/CreateGameDialog.svelte";
+	import PostGameDialog from "./dialog/PostGameDialog.svelte";
 	import GuessGrid from "./GuessGrid.svelte";
 	import Keyboard from "./Keyboard.svelte";
-	import PostGameDialog from "./PostGameDialog.svelte";
-	import { createGameDialogIsVisible, guesses, guessesAreExhausted, targetWord } from "./stores";
     import TopNav from "./TopNav.svelte";
 
 	const handleKeyDown = (event: KeyboardEvent) => {

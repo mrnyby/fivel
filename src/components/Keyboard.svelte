@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { GuessCharacterColor } from "./GuessCharacter";
-	import { guesses, guessesAreExhausted, keyColors, targetWord } from "./stores";
+	import { guesses, guessesAreExhausted, keyColors, targetWord } from "../stores";
+	import { GuessCharacterColor } from "../util/GuessCharacter";
 
 	const handleKeyClick = (event: Event) => {
 		const eventElement = event.target as HTMLElement;

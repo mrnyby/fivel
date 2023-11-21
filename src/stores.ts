@@ -1,8 +1,8 @@
 import { derived, get, readable, writable } from "svelte/store";
 
-import Guess from "./Guess";
-import { GuessCharacterColor } from "./GuessCharacter";
-import WordEncoder from "./WordEncoder";
+import Guess from "./util/Guess";
+import { GuessCharacterColor } from "./util/GuessCharacter";
+import WordEncoder from "./util/WordEncoder";
 
 const _createGuesses = () => {
 	const { subscribe, update } = writable(Array.from({ length: 6 }, () => new Guess()));

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createGameDialogIsVisible, targetWord } from "./stores";
+	import { createGameDialogIsVisible, targetWord } from "../stores";
 
 	const handleClick = () => {
 		createGameDialogIsVisible.set(true);

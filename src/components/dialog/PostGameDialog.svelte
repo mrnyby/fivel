@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { onDestroy } from "svelte";
 
-    import Dialog from "./Dialog.svelte";
-	import { GuessCharacterColor } from "./GuessCharacter";
-	import { guesses, guessIsCorrect, postGameDialogIsVisible, targetWord } from "./stores";
+	import { guesses, guessIsCorrect, postGameDialogIsVisible, targetWord } from "../../stores";
+	import { GuessCharacterColor } from "../../util/GuessCharacter";
+	import Dialog from "./Dialog.svelte";
 
 	let nGuesses = 0;
 

@@ -11,11 +11,11 @@
 
 		const key = eventElement.dataset.key;
 		switch (key) {
-			case "enter":
-				guesses.submitGuess();
-				break;
 			case "delete":
 				guesses.deleteCharacter();
+				break;
+			case "enter":
+				guesses.submitGuess();
 				break;
 			default:
 				if (key !== undefined) {
@@ -54,7 +54,7 @@
 		<div class="spacer" />
 	</div>
 	<div class="row">
-		<button data-key="enter">enter</button>
+		<button data-key="delete">delete</button>
 		{#each [..."zxcvbnm"] as key}
 			<button
 				class:gray={$keyColors.get(key) === GuessCharacterColor.Gray}
@@ -65,7 +65,7 @@
 				{key}
 			</button>
 		{/each}
-		<button data-key="delete">delete</button>
+		<button data-key="enter">enter</button>
 	</div>
 </div>
 

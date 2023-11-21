@@ -3,11 +3,11 @@
 	import GuessGrid from "./GuessGrid.svelte";
 	import Keyboard from "./Keyboard.svelte";
 	import PostGameDialog from "./PostGameDialog.svelte";
-	import { guesses, guessesAreExhausted, targetWord } from "./stores";
+	import { createGameDialogIsVisible, guesses, guessesAreExhausted, targetWord } from "./stores";
     import TopNav from "./TopNav.svelte";
 
 	const handleKeyDown = (event: KeyboardEvent) => {
-		if ($targetWord === "" || $guessesAreExhausted) {
+		if ($targetWord === "" || $guessesAreExhausted || $createGameDialogIsVisible) {
 			return;
 		}
 

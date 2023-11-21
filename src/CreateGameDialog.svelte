@@ -10,7 +10,7 @@
 	let popoverTimeout: NodeJS.Timeout;
 	let word = "";
 
-	const handleClick = () => {
+	const handleSubmit = () => {
 		errorMessage = "";
 		link = "";
 
@@ -36,16 +36,18 @@
 </script>
 
 <Dialog isVisibleStore={createGameDialogIsVisible} title="Create a Puzzle">
-	<label for="word">Enter a five-letter word, then share the link!</label>
-	<div class="input-group">
-		<input id="word" autocomplete="off" bind:value={word} maxlength="5">
-		<button on:click={handleClick}>
-			<span class="material-icons">add_link</span>
-			{#if isPopoverOpen}
-				<span class="popover">Copied to clipboard</span>
-			{/if}
-		</button>
-	</div>
+	<form on:submit|preventDefault={handleSubmit}>
+		<label for="word">Enter a five-letter word, then share the link!</label>
+		<div class="input-group">
+			<input id="word" autocomplete="off" bind:value={word} maxlength="5">
+			<button type="submit">
+				<span class="material-icons">add_link</span>
+				{#if isPopoverOpen}
+					<span class="popover">Copied to clipboard</span>
+				{/if}
+			</button>
+		</div>
+	</form>
 	<span class="result" class:error={errorMessage.length > 0}>
 		{#if errorMessage.length > 0}
 			{errorMessage}

@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { guesses, guessesAreExhausted, keyColors, targetWord } from "../stores";
+	import { guesses, keyColors } from "../stores";
 	import { GuessCharacterColor } from "../util/GuessCharacter";
 
 	const handleKeyClick = (event: Event) => {
 		const eventElement = event.target as HTMLElement;
 
-		if (!eventElement.matches("button") || $targetWord === "" || $guessesAreExhausted) {
+		if (!eventElement.matches("button")) {
 			return;
 		}
 

@@ -6,23 +6,32 @@ import WordEncoder from "./util/WordEncoder";
 
 const _createGuesses = () => {
 	const { subscribe, update } = writable(Array.from({ length: 6 }, () => new Guess()));
+	const isBlocked = () =>
+		get(targetWord) === ""
+		|| get(guessIsCorrect)
+		|| get(guessesAreExhausted)
+		|| get(createGameDialogIsVisible)
+		|| get(postGameDialogIsVisible);
 
 	let nGuesses = 0;
 
 	return {
 		addCharacter: (character: string) => update(guesses => {
-			guesses[nGuesses].addCharacter(character);
+			if (!isBlocked()) {
+				guesses[nGuesses].addCharacter(character);
+			}
+
 			return guesses;
 		}),
 		deleteCharacter: () => update(guesses => {
-			guesses[nGuesses].deleteCharacter();
+			if (!isBlocked()) {
+				guesses[nGuesses].deleteCharacter();
+			}
+
 			return guesses;
 		}),
 		submitGuess: () => update(guesses => {
-			if (
-				!get(guessesAreExhausted)
-				&& guesses[nGuesses].submit(get(targetWord))
-			) {
+			if (!isBlocked() && guesses[nGuesses].submit(get(targetWord))) {
 				guesses[nGuesses].characters.forEach(guessCharacter => {
 					keyColors.setKeyColor(guessCharacter.value, guessCharacter.color);
 				});

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createGameDialogIsVisible, guesses, guessesAreExhausted, targetWord } from "../stores";
+	import { guesses } from "../stores";
 	import CreateGameDialog from "./dialog/CreateGameDialog.svelte";
 	import PostGameDialog from "./dialog/PostGameDialog.svelte";
 	import GuessGrid from "./GuessGrid.svelte";
@@ -7,10 +7,6 @@
     import TopNav from "./TopNav.svelte";
 
 	const handleKeyDown = (event: KeyboardEvent) => {
-		if ($targetWord === "" || $guessesAreExhausted || $createGameDialogIsVisible) {
-			return;
-		}
-
 		const key = event.key;
 		switch (key) {
 			case "Enter":

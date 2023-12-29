@@ -7,7 +7,7 @@
     let errorMessage = "";
     let isPopoverOpen = false;
     let link = "";
-    let popoverTimeout: NodeJS.Timeout;
+    let popoverTimeout: number;
     let word = "";
 
     const handleSubmit = () => {

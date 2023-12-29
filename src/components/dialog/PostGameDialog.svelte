@@ -8,9 +8,9 @@
     let nGuesses = 0;
 
     let isCopyPopoverOpen = false;
-    let copyPopoverTimeout: NodeJS.Timeout;
+    let copyPopoverTimeout: number;
     let isCopyHtmlPopoverOpen = false;
-    let copyHtmlPopoverTimeout: NodeJS.Timeout;
+    let copyHtmlPopoverTimeout: number;
 
     const unsubscribe = guesses.subscribe((guesses) => {
         nGuesses = guesses.filter((guess) => guess.isSubmitted).length

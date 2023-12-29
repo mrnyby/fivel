@@ -1,56 +1,56 @@
 <script lang="ts">
     import type { Writable } from "svelte/store";
 
-	export let isVisibleStore: Writable<boolean>;
-	export let title: string;
-	export let titleClass = "";
+    export let isVisibleStore: Writable<boolean>;
+    export let title: string;
+    export let titleClass = "";
 
-	const handleClick = () => {
-		isVisibleStore.set(false);
-	};
+    const handleClick = () => {
+        isVisibleStore.set(false);
+    };
 </script>
 
 {#if $isVisibleStore}
-	<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-	<div on:click={handleClick} on:keypress={handleClick} class="dialog-overlay" role="dialog">
-		<dialog on:click={(event) => event.stopPropagation()} on:keypress={(event) => event.stopPropagation()} open>
-			<button on:click={handleClick}>
-				<span class="material-icons">close</span>
-			</button>
-			<h1 class={titleClass}>{title}</h1>
-			<slot></slot>
-		</dialog>
-	</div>
+    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+    <div on:click={handleClick} on:keypress={handleClick} class="dialog-overlay" role="dialog">
+        <dialog on:click={(event) => event.stopPropagation()} on:keypress={(event) => event.stopPropagation()} open>
+            <button on:click={handleClick}>
+                <span class="material-icons">close</span>
+            </button>
+            <h1 class={titleClass}>{title}</h1>
+            <slot></slot>
+        </dialog>
+    </div>
 {/if}
 
 <style>
-	button {
-		background: none;
+    button {
+        background: none;
 
-		position: absolute;
-		top: 0;
-		right: -8px;
-	}
+        position: absolute;
+        top: 0;
+        right: -8px;
+    }
 
-	dialog {
-		border: none;
-		border-radius: 4px;
-		min-width: 300px;
+    dialog {
+        border: none;
+        border-radius: 4px;
+        min-width: 300px;
 
-		display: flex;
-		flex-direction: column;
-	}
+        display: flex;
+        flex-direction: column;
+    }
 
-	.dialog-overlay {
-		background: rgba(0, 0, 0, 0.3);
+    .dialog-overlay {
+        background: rgba(0, 0, 0, 0.3);
 
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
 
-		display: flex;
-		align-items: center;
-	}
+        display: flex;
+        align-items: center;
+    }
 </style>

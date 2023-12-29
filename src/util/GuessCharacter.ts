@@ -1,10 +1,10 @@
 export enum GuessCharacterColor {
-	Gray,
-	Green,
-	Yellow,
+    Gray,
+    Green,
+    Yellow,
 };
 
 export default class GuessCharacter {
-	value = "";
-	color = GuessCharacterColor.Gray;
+    value = "";
+    color = GuessCharacterColor.Gray;
 };

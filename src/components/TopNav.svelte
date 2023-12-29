@@ -1,54 +1,54 @@
 <script lang="ts">
-	import {
-		createGameDialogIsVisible,
-		guessesAreExhausted,
-		guessIsCorrect,
-		postGameDialogIsVisible,
-		targetWord,
-	} from "../stores";
+    import {
+        createGameDialogIsVisible,
+        guessesAreExhausted,
+        guessIsCorrect,
+        postGameDialogIsVisible,
+        targetWord,
+    } from "../stores";
 
-	const handleNewGameClick = () => {
-		createGameDialogIsVisible.set(true);
-	};
+    const handleNewGameClick = () => {
+        createGameDialogIsVisible.set(true);
+    };
 
-	const handleViewResultsClick = () => {
-		postGameDialogIsVisible.set(true);
-	};
+    const handleViewResultsClick = () => {
+        postGameDialogIsVisible.set(true);
+    };
 </script>
 
 <nav>
-	<button
-		class="link-button"
-		class:a-winner-is-you={!$createGameDialogIsVisible && $targetWord === ""}
-		on:click={handleNewGameClick}
-	>
-		New Game
-	</button>
-	{#if $guessesAreExhausted || $guessIsCorrect}
-		<span class="spacer">|</span>
-		<button class="link-button" on:click={handleViewResultsClick}>
-			View Results
-		</button>
-	{/if}
+    <button
+        class="link-button"
+        class:a-winner-is-you={!$createGameDialogIsVisible && $targetWord === ""}
+        on:click={handleNewGameClick}
+    >
+        New Game
+    </button>
+    {#if $guessesAreExhausted || $guessIsCorrect}
+        <span class="spacer">|</span>
+        <button class="link-button" on:click={handleViewResultsClick}>
+            View Results
+        </button>
+    {/if}
 </nav>
 
 <style>
-	nav {
-		display: flex;
-		margin-bottom: 16px;
-	}
+    nav {
+        display: flex;
+        margin-bottom: 16px;
+    }
 
-	nav button {
-		display: flex;
-		align-items: center;
-		white-space: nowrap;
-	}
+    nav button {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+    }
 
-	nav button.a-winner-is-you {
-		text-decoration: none;
-	}
+    nav button.a-winner-is-you {
+        text-decoration: none;
+    }
 
-	.spacer {
-		margin: 0 4px;
-	}
+    .spacer {
+        margin: 0 4px;
+    }
 </style>

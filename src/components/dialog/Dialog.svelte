@@ -33,8 +33,6 @@
     }
 
     dialog {
-        border: none;
-        border-radius: 4px;
         min-width: 300px;
 
         display: flex;

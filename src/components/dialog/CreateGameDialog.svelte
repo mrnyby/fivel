@@ -78,13 +78,14 @@
 
     button:focus {
         border-color: transparent;
-        outline-color: var(--color-dark-gray);
+        outline-color: var(--color-foreground);
     }
 
     input {
         background: transparent;
         border: 1px solid var(--color-gray);
         border-radius: 4px 0 0 4px;
+        color: var(--color-foreground);
         font-size: 16px;
         outline: 1px solid transparent;
         padding: 4px;
@@ -93,7 +94,7 @@
 
     input:focus {
         border-color: transparent;
-        outline-color: var(--color-dark-gray);
+        outline-color: var(--color-foreground);
     }
 
     .error {

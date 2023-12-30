@@ -1,4 +1,7 @@
 :root {
+    --color-foreground: #444444;
+    --color-background: #ffffff;
+
     --color-gray: #bbbbbb;
     --color-dark-gray: #444444;
     --color-light-gray: #dddddd;
@@ -11,27 +14,46 @@
     --color-violet: #a855df;
 }
 
-* {
-    color: var(--color-dark-gray);
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-foreground: #eeeeee;
+        --color-background: #222222;
+    }
+}
+
+a {
+    color: var(--color-foreground);
 }
 
 body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
     font-family: Arial, sans-serif;
     height: 100%;
     margin: 0;
 }
 
 button {
-    background: var(--color-light-gray);
     border: none;
     border-radius: 4px;
-    color: var(--color-dark-gray);
+    color: var(--color-foreground);
     flex: 1;
     font-size: 0.9em;
     font-weight: bold;
     margin: 0.1em;
     padding: 0.5em 1em;
     text-transform: uppercase;
+}
+
+dialog {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-foreground);
+    border-radius: 4px;
+    /*
+     * I would expect setting the color of the body element to change the color of everything. But apparently it only
+     * changes the color of everything except dialogs?
+     */
+    color: var(--color-foreground);
 }
 
 h1 {

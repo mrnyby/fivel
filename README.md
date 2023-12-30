@@ -1,25 +1,28 @@
-# Svelte + TS + Vite
+# BLAMO
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+[Play now!](https://mrnyby.github.io/blamo/)
 
-## Recommended IDE Setup
+A create-your-own Wordle clone. Enter your favorite word, generate a game link, and send it to your homies!
+
+## Setup
+
+Install [NodeJS](https://nodejs.org/en), clone this repository, and run `npm install`.
+
+### Recommended IDE
 
 [VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
 
-## Need an official Svelte framework?
+### Scripts
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+This project uses several NPM scripts to manage various build tasks:
+
+1. `build`: Compiles this project and outputs the result to the `docs` directory. GitHub Pages will host the code stored in this `docs` directory.
+1. `check`: Provides diagnostics checks for unused CSS, accessibility hints, and JavaScript/TypeScript errors.
+1. `dev`: Starts a local development server, compiles the project, and watches for changes to source files. Open browser tabs will be automatically refreshed when changes are made to source files.
+1. `preview`: Starts a local server that hosts the code stored in the `docs` directory.
+1. `test`: Runs unit tests.
 
 ## Technical considerations
-
-**Why use this over SvelteKit?**
-
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
-
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
 
 **Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
 

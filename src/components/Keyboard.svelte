@@ -90,6 +90,16 @@
         color: #ffffff;
     }
 
+    @media (prefers-color-scheme: dark) {
+        button {
+            background: var(--color-gray);
+        }
+
+        button.gray {
+            background: var(--color-dark-gray);
+        }
+    }
+
     .keyboard {
         max-width: 512px;
         touch-action: manipulation;

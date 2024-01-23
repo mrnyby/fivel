@@ -58,31 +58,31 @@
 
 <Dialog
     isVisibleStore={postGameDialogIsVisible}
-    title={$guessIsCorrect ? "Winner!" : "Loser!"}
+    title={$guessIsCorrect ? "Winner!" : "You lost!"}
     titleClass={$guessIsCorrect ? "a-winner-is-you" : ""}
 >
+    <div class="centered guess-grid">
+        {#each $targetWord as character}
+            <div class="guess-cell submitted green">{character}</div>
+        {/each}
+    </div>
     {#if $guessIsCorrect}
-        <div class="centered guess-grid">
-            {#each $targetWord as character}
-                <div class="guess-cell submitted green">{character}</div>
-            {/each}
-        </div>
         <span class="centered">{nGuesses} out of 6 guesses used.</span>
     {:else}
         <span class="centered">Better luck next time.</span>
     {/if}
     <div class="centered">
-        <button class="link-button" on:click={handleCopyClick}>
-            Copy results
-            {#if isCopyPopoverOpen}
-                <span class="popover">Copied to clipboard</span>
-            {/if}
-        </button>
-        |
         <button class="link-button" on:click={handleCopyHtmlClick}>
             Copy HTML results
             {#if isCopyHtmlPopoverOpen}
                 <span class="popover">🍎🦚</span>
+            {/if}
+        </button>
+        |
+        <button class="link-button" on:click={handleCopyClick}>
+            Copy results
+            {#if isCopyPopoverOpen}
+                <span class="popover">Copied to clipboard</span>
             {/if}
         </button>
 </div>

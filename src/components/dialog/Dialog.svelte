@@ -40,7 +40,7 @@
     }
 
     .dialog-overlay {
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.4);
 
         position: absolute;
         top: 0;
@@ -50,5 +50,11 @@
 
         display: flex;
         align-items: center;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        .dialog-overlay {
+            background: rgba(0, 0, 0, 0.7);
+        }
     }
 </style>

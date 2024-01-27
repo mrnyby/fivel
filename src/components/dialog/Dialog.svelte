@@ -33,23 +33,21 @@
     }
 
     dialog {
-        min-width: 300px;
-
         display: flex;
         flex-direction: column;
+
+        position: absolute;
+        top: 30%;
     }
 
     .dialog-overlay {
-        background: rgba(0, 0, 0, 0.4);
-
         position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
         left: 0;
 
-        display: flex;
-        align-items: center;
+        background: rgba(0, 0, 0, 0.4);
     }
 
     @media (prefers-color-scheme: dark) {

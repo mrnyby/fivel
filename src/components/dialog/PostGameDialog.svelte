@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onDestroy } from "svelte";
 
-    import { guesses, guessIsCorrect, postGameDialogIsVisible, targetWord } from "../../stores";
+    import { gameConfig, guesses, guessIsCorrect, postGameDialogIsVisible } from "../../stores";
     import { GuessCharacterColor } from "../../util/GuessCharacter";
     import Dialog from "./Dialog.svelte";
 
@@ -62,7 +62,7 @@
     titleClass={$guessIsCorrect ? "a-winner-is-you" : ""}
 >
     <div class="centered guess-grid">
-        {#each $targetWord as character}
+        {#each $gameConfig?.word || "" as character}
             <div class="guess-cell submitted green">{character}</div>
         {/each}
     </div>

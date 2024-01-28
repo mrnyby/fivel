@@ -1,10 +1,10 @@
 <script lang="ts">
     import {
         createGameDialogIsVisible,
+        gameConfig,
         guessesAreExhausted,
         guessIsCorrect,
         postGameDialogIsVisible,
-        targetWord,
     } from "../stores";
 
     const handleNewGameClick = () => {
@@ -19,7 +19,7 @@
 <nav>
     <button
         class="link-button"
-        class:a-winner-is-you={!$createGameDialogIsVisible && $targetWord === ""}
+        class:a-winner-is-you={!$createGameDialogIsVisible && $gameConfig === null}
         on:click={handleNewGameClick}
     >
         New Game

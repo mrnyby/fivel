@@ -1,13 +1,13 @@
 import { derived, get, readable, writable } from "svelte/store";
 
+import GameConfig from "./util/GameConfig";
 import Guess from "./util/Guess";
 import { GuessCharacterColor } from "./util/GuessCharacter";
-import WordEncoder from "./util/WordEncoder";
 
 const _createGuesses = () => {
     const { subscribe, update } = writable(Array.from({ length: 6 }, () => new Guess()));
     const isBlocked = () =>
-        get(targetWord) === ""
+        get(gameConfig)?.word === null
         || get(guessIsCorrect)
         || get(guessesAreExhausted)
         || get(createGameDialogIsVisible)
@@ -31,7 +31,11 @@ const _createGuesses = () => {
             return guesses;
         }),
         submitGuess: () => update(guesses => {
-            if (!isBlocked() && guesses[nGuesses].submit(get(targetWord))) {
+            // Because `get(gameConfig)` can return null, save it off in a new variable so we can manually check its
+            // nullness and appease the compiler. `isBlocked()` will already do the same thing, but the compiler can't
+            // know that.
+            const nullCheckGameConfig = get(gameConfig);
+            if (!isBlocked() && nullCheckGameConfig !== null && guesses[nGuesses].submit(nullCheckGameConfig.word)) {
                 guesses[nGuesses].characters.forEach(guessCharacter => {
                     keyColors.setKeyColor(guessCharacter.value, guessCharacter.color);
                 });
@@ -81,7 +85,7 @@ const _createKeyColors = () => {
     };
 };
 
-const _urlParams = new URLSearchParams(window.location.search);
+const serializedGameConfig = window.location.pathname.split("/")[2];
 
 export const guesses = _createGuesses();
 export const guessesAreExhausted = derived(guesses, $guesses => $guesses.every(guess => guess.isSubmitted));
@@ -96,7 +100,7 @@ export const nextCharacterIndices = derived(guesses, $guesses => {
     const nextCharacterIndex = $guesses[nextGuessIndex].characters.findIndex(character => character.value === "");
     return [nextGuessIndex, nextCharacterIndex] as [number, number];
 });
-export const targetWord = readable(WordEncoder.decode(_urlParams.get("id")));
+export const gameConfig = readable(serializedGameConfig === "" ? null : GameConfig.deserialize(serializedGameConfig));
 
-export const createGameDialogIsVisible = writable(_urlParams.get("id") === null);
+export const createGameDialogIsVisible = writable(serializedGameConfig === "");
 export const postGameDialogIsVisible = writable(false);

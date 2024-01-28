@@ -1,10 +1,12 @@
 <script lang="ts">
     import dictionary from "../../dictionary";
     import { createGameDialogIsVisible } from "../../stores";
-    import WordEncoder from "../../util/WordEncoder";
+    import GameConfig from "../../util/GameConfig";
     import Dialog from "./Dialog.svelte";
 
     let errorMessage = "";
+    let gameId = "";
+    let hint = "";
     let isPopoverOpen = false;
     let link = "";
     let popoverTimeout: number;
@@ -26,7 +28,10 @@
             return;
         }
 
-        link = `${window.location.href.split("?")[0]}?id=${WordEncoder.encode(lowerCaseWord)}`;
+        const baseUrl = window.location.href.split("/").slice(0, 4).join("/");
+        const gameConfig = new GameConfig(lowerCaseWord, gameId, hint);
+        link = `${baseUrl}/${gameConfig.serialize()}`;
+
         navigator.clipboard.writeText(link).then(() => {
             isPopoverOpen = true;
             clearTimeout(popoverTimeout);
@@ -38,8 +43,8 @@
 <Dialog isVisibleStore={createGameDialogIsVisible} title="Create a Puzzle">
     <form on:submit|preventDefault={handleSubmit}>
         <label for="word">Enter a five-letter word, then share the link!</label>
-        <div class="input-group">
-            <input id="word" autocomplete="off" bind:value={word} maxlength="5">
+        <div class="action-input">
+            <input bind:value={word} id="word" autocomplete="off" maxlength="5">
             <button type="submit">
                 <span class="material-icons">add_link</span>
                 {#if isPopoverOpen}
@@ -47,12 +52,17 @@
                 {/if}
             </button>
         </div>
+        <details class="small-text">
+            <summary>Advanced Options</summary>
+            <input bind:value={hint} class="small-text" placeholder="Hint" autocomplete="off">
+            <input bind:value={gameId} class="small-text" placeholder="Game ID" autocomplete="off">
+        </details>
     </form>
     <span class="result" class:error={errorMessage.length > 0}>
         {#if errorMessage.length > 0}
             {errorMessage}
         {:else if link.length > 0}
-            <a href={link}>{link}</a>
+            <a class="small-text" href={link}>{link}</a>
         {:else}
             &nbsp;
         {/if}
@@ -60,6 +70,12 @@
 </Dialog>
 
 <style>
+    a {
+        display: block;
+        max-width: 256px;
+        word-break: break-all;
+    }
+
     button {
         background: none;
         border: 1px solid var(--color-gray);
@@ -81,10 +97,21 @@
         outline-color: var(--color-foreground);
     }
 
+    details {
+        margin-bottom: 16px;
+    }
+
+    details input {
+        box-sizing: border-box;
+        display: block;
+        margin-top: 8px;
+        width: 100%;
+    }
+
     input {
         background: transparent;
         border: 1px solid var(--color-gray);
-        border-radius: 4px 0 0 4px;
+        border-radius: 4px;
         color: var(--color-foreground);
         font-size: 16px;
         outline: 1px solid transparent;
@@ -97,16 +124,35 @@
         outline-color: var(--color-foreground);
     }
 
-    .error {
-        color: var(--color-red);
+    summary {
+        cursor: pointer;
+        list-style: none;
+        text-align: center;
+        text-decoration: underline;
     }
 
-    .input-group {
+    summary::-webkit-details-marker {
+        display: none;
+    }
+
+    .action-input {
         display: flex;
         margin: 4px 0 16px 0;
     }
 
+    .action-input input {
+        border-radius: 4px 0 0 4px;
+    }
+
+    .error {
+        color: var(--color-red);
+    }
+
     .result {
         align-self: center;
+    }
+
+    .small-text {
+        font-size: 0.8em;
     }
 </style>

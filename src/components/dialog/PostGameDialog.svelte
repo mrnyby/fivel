@@ -17,12 +17,14 @@
     });
     onDestroy(unsubscribe);
 
-    const handleCopyClick = () => handleClick();
-
-    const handleCopyHtmlClick = () => handleClick(true);
-
     const handleClick = (outputHtml = false) => {
         const separator = outputHtml ? "<br/>" : "\n";
+
+        const gameId = $gameConfig?.gameId;
+        let gameIdString = "";
+        if (gameId !== undefined) {
+            gameIdString = `Game ID: ${gameId}${separator}`;
+        }
 
         const guessEmojis = $guesses
             .filter((guess) => guess.isSubmitted)
@@ -42,7 +44,7 @@
             })
             .join(separator);
 
-        navigator.clipboard.writeText(`${nGuesses}/6${separator}${guessEmojis}`).then(() => {
+        navigator.clipboard.writeText(`${gameIdString}${nGuesses}/6${separator}${guessEmojis}`).then(() => {
             if (outputHtml) {
                 isCopyHtmlPopoverOpen = true;
                 clearTimeout(copyHtmlPopoverTimeout);
@@ -72,14 +74,14 @@
         <span class="centered">Better luck next time.</span>
     {/if}
     <div class="centered">
-        <button class="link-button" on:click={handleCopyHtmlClick}>
+        <button class="link-button" on:click={() => handleClick(true)}>
             Copy HTML results
             {#if isCopyHtmlPopoverOpen}
                 <span class="popover">🍎🦚</span>
             {/if}
         </button>
         |
-        <button class="link-button" on:click={handleCopyClick}>
+        <button class="link-button" on:click={() => handleClick()}>
             Copy results
             {#if isCopyPopoverOpen}
                 <span class="popover">Copied to clipboard</span>

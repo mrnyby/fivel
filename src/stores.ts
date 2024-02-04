@@ -7,7 +7,7 @@ import { GuessCharacterColor } from "./util/GuessCharacter";
 const _createGuesses = () => {
     const { subscribe, update } = writable(Array.from({ length: 6 }, () => new Guess()));
     const isBlocked = () =>
-        get(gameConfig)?.word === null
+        get(gameConfig)?.word === undefined
         || get(guessIsCorrect)
         || get(guessesAreExhausted)
         || get(createGameDialogIsVisible)

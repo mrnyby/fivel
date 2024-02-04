@@ -65,6 +65,10 @@
         }
     }
 
+    .guess-grid {
+        margin-bottom: 8px;
+    }
+
     .invalid {
         border-color: var(--color-red);
     }

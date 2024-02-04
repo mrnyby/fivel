@@ -29,7 +29,12 @@
         }
 
         const baseUrl = window.location.href.split("/").slice(0, 4).join("/");
-        const gameConfig = new GameConfig(lowerCaseWord, gameId, hint);
+        const gameConfig = new GameConfig(
+            lowerCaseWord,
+            // If gameId/hint aren't set, pass them in as undefined to save URL space when encoding this GameConfig
+            gameId === "" ? undefined : gameId,
+            hint === "" ? undefined : hint
+        );
         link = `${baseUrl}/${gameConfig.serialize()}`;
 
         navigator.clipboard.writeText(link).then(() => {

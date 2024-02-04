@@ -1,6 +1,6 @@
-# BLAMO
+# Fivel
 
-[Play now!](https://mrnyby.github.io/blamo/)
+[Play now!](https://mrnyby.github.io/fivel/)
 
 A create-your-own Wordle clone. Enter your favorite word, generate a game link, and send it to your homies!
 

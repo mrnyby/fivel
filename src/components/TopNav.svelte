@@ -61,8 +61,9 @@
         box-sizing: border-box;
         color: var(--color-green);
         margin-bottom: 8px;
+        max-width: 336px;
         padding: 2px 4px;
-        width: 336px;
+        text-align: center;
     }
 
     .spacer {

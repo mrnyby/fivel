@@ -3,6 +3,7 @@
     import CreateGameDialog from "./dialog/CreateGameDialog.svelte";
     import PostGameDialog from "./dialog/PostGameDialog.svelte";
     import GuessGrid from "./GuessGrid.svelte";
+    import Hint from "./Hint.svelte";
     import Keyboard from "./Keyboard.svelte";
     import TopNav from "./TopNav.svelte";
 
@@ -28,6 +29,7 @@
     <TopNav />
     <GuessGrid />
     <div class="spacer"></div>
+    <Hint />
     <Keyboard />
     <CreateGameDialog />
     <PostGameDialog />

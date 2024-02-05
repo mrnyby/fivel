@@ -31,12 +31,6 @@
         </button>
     {/if}
 </nav>
-{#if $gameConfig?.hint !== undefined}
-    <div class="hint">
-        <strong>Hint:</strong>
-        {$gameConfig.hint}
-    </div>
-{/if}
 
 <style>
     nav {
@@ -52,18 +46,6 @@
 
     nav button.a-winner-is-you {
         text-decoration: none;
-    }
-
-    .hint {
-        background: var(--color-translucent-green);
-        border: 1px solid var(--color-green);
-        border-radius: 4px;
-        box-sizing: border-box;
-        color: var(--color-green);
-        margin-bottom: 8px;
-        max-width: 336px;
-        padding: 2px 4px;
-        text-align: center;
     }
 
     .spacer {

@@ -85,7 +85,8 @@ const _createKeyColors = () => {
     };
 };
 
-const serializedGameConfig = window.location.pathname.split("/")[2];
+const _urlParams = new URLSearchParams(window.location.search);
+const _serializedGameConfig = _urlParams.get("f");
 
 export const guesses = _createGuesses();
 export const guessesAreExhausted = derived(guesses, $guesses => $guesses.every(guess => guess.isSubmitted));
@@ -100,7 +101,7 @@ export const nextCharacterIndices = derived(guesses, $guesses => {
     const nextCharacterIndex = $guesses[nextGuessIndex].characters.findIndex(character => character.value === "");
     return [nextGuessIndex, nextCharacterIndex] as [number, number];
 });
-export const gameConfig = readable(serializedGameConfig === "" ? null : GameConfig.deserialize(serializedGameConfig));
+export const gameConfig = readable(_serializedGameConfig === null ? null : GameConfig.deserialize(_serializedGameConfig));
 
-export const createGameDialogIsVisible = writable(serializedGameConfig === "");
+export const createGameDialogIsVisible = writable(_serializedGameConfig === null);
 export const postGameDialogIsVisible = writable(false);

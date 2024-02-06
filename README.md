@@ -1,6 +1,6 @@
-# Fivel
+# Kwordle
 
-[Play now!](https://mrnyby.github.io/fivel/)
+[Play now!](https://mrnyby.github.io/kwordle/)
 
 A create-your-own Wordle clone. Enter your favorite word, generate a game link, and send it to your homies!
 

@@ -28,7 +28,6 @@
     {/if}
 
     {#if $guessesAreExhausted || $guessIsCorrect}
-        <span class="spacer">|</span>
         <button class="link-button" on:click={handleViewResultsClick}>
             View Results
         </button>
@@ -46,9 +45,5 @@
 
     nav button {
         white-space: nowrap;
-    }
-
-    .spacer {
-        margin: 0 4px;
     }
 </style>

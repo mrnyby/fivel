@@ -26,7 +26,7 @@
         New Game
     </button>
     {/if}
-    
+
     {#if $guessesAreExhausted || $guessIsCorrect}
         <span class="spacer">|</span>
         <button class="link-button" on:click={handleViewResultsClick}>
@@ -46,10 +46,6 @@
 
     nav button {
         white-space: nowrap;
-    }
-
-    nav button.a-winner-is-you {
-        text-decoration: none;
     }
 
     .spacer {

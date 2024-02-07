@@ -17,13 +17,16 @@
 </script>
 
 <nav>
-    <button
+    <h1>Kwordle {#if $gameConfig?.gameId}<span>#{$gameConfig?.gameId}</span>{/if}</h1>
+
+    {#if !$createGameDialogIsVisible && $gameConfig === null}<button
         class="link-button"
-        class:a-winner-is-you={!$createGameDialogIsVisible && $gameConfig === null}
         on:click={handleNewGameClick}
     >
         New Game
     </button>
+    {/if}
+    
     {#if $guessesAreExhausted || $guessIsCorrect}
         <span class="spacer">|</span>
         <button class="link-button" on:click={handleViewResultsClick}>
@@ -36,6 +39,7 @@
     nav {
         display: flex;
         justify-content: center;
+        flex-direction: column;
 
         margin-bottom: 8px;
     }

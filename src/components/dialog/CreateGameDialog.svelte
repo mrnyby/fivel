@@ -56,17 +56,17 @@
                 {/if}
             </button>
         </div>
-        <details class="small-text">
-            <summary>Advanced Options</summary>
-            <input bind:value={hint} class="small-text" placeholder="Hint" autocomplete="off">
-            <input bind:value={gameId} class="small-text" placeholder="Game ID" autocomplete="off">
+        <details>
+            <summary>Add hint and game number</summary>
+            <input bind:value={hint} placeholder="Hint" autocomplete="off">
+            <input bind:value={gameId} placeholder="Game ID" autocomplete="off">
         </details>
     </form>
     <span class="result" class:error={errorMessage.length > 0}>
         {#if errorMessage.length > 0}
             {errorMessage}
         {:else if link.length > 0}
-            <a class="small-text" href={link}>{link}</a>
+            <a href={link}>{link}</a>
         {:else}
             &nbsp;
         {/if}
@@ -154,9 +154,5 @@
 
     .result {
         align-self: center;
-    }
-
-    .small-text {
-        font-size: 0.8em;
     }
 </style>

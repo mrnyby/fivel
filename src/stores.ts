@@ -48,7 +48,7 @@ const _createGuesses = () => {
                         ""
                     ));
 
-                const newCache = new GameCache(submittedGuesses);
+                const newCache = new GameCache(submittedGuesses, get(gameCache).timestamp);
                 gameCache.set(newCache);
                 localStorage.setItem(nullCheckGameConfig.word, JSON.stringify(newCache));
 

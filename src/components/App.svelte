@@ -1,11 +1,18 @@
 <script lang="ts">
-    import { guesses } from "../stores";
+    import { get } from "svelte/store";
+
+    import { gameCache, guesses } from "../stores";
     import CreateGameDialog from "./dialog/CreateGameDialog.svelte";
     import PostGameDialog from "./dialog/PostGameDialog.svelte";
     import GuessGrid from "./GuessGrid.svelte";
     import Hint from "./Hint.svelte";
     import Keyboard from "./Keyboard.svelte";
     import TopNav from "./TopNav.svelte";
+
+    get(gameCache).guesses.forEach(guess => {
+        [...guess].forEach(guessCharacter => guesses.addCharacter(guessCharacter));
+        guesses.submitGuess();
+    });
 
     const handleKeyDown = (event: KeyboardEvent) => {
         const key = event.key;

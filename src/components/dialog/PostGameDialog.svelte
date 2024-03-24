@@ -1,21 +1,46 @@
 <script lang="ts">
     import { onDestroy } from "svelte";
 
-    import { gameConfig, guesses, guessIsCorrect, postGameDialogIsVisible } from "../../stores";
+    import { gameCache, gameConfig, guesses, guessIsCorrect, postGameDialogIsVisible } from "../../stores";
     import { GuessCharacterColor } from "../../util/GuessCharacter";
     import Dialog from "./Dialog.svelte";
-
-    let nGuesses = 0;
 
     let isCopyPopoverOpen = false;
     let copyPopoverTimeout: number;
     let isCopyHtmlPopoverOpen = false;
     let copyHtmlPopoverTimeout: number;
 
+    let nGuesses = 0;
     const unsubscribe = guesses.subscribe((guesses) => {
         nGuesses = guesses.filter((guess) => guess.isSubmitted).length
     });
     onDestroy(unsubscribe);
+
+    const monthList = [
+        "Jan.",
+        "Feb.",
+        "Mar.",
+        "Apr.",
+        "May",
+        "Jun.",
+        "Jul.",
+        "Aug.",
+        "Sep.",
+        "Oct.",
+        "Nov.",
+        "Dec.",
+    ];
+
+    const getTimestampString = (timestamp: number) => {
+        const date = new Date(timestamp);
+        const month = monthList[date.getMonth()];
+        const day = date.getDate();
+        const year = date.getFullYear();
+        const hours = date.getHours().toString().padStart(2, "0");
+        const minutes = date.getMinutes().toString().padStart(2, "0");
+
+        return `Finished on ${month} ${day}, ${year} at ${hours}:${minutes}`;
+    };
 
     const handleClick = (outputHtml = false) => {
         const separator = outputHtml ? "<br/>" : "\n";
@@ -64,16 +89,19 @@
     titleClass={$guessIsCorrect ? "a-winner-is-you" : ""}
 >
     <div class="centered guess-grid">
-        {#each $gameConfig?.word || "" as character}
+        {#each $gameConfig?.word ?? "" as character}
             <div class="guess-cell submitted green">{character}</div>
         {/each}
     </div>
     {#if $guessIsCorrect}
-        <span class="centered">{nGuesses} out of 6 guesses used.</span>
+        <div class="centered">{nGuesses} out of 6 guesses used</div>
     {:else}
-        <span class="centered">Better luck next time.</span>
+        <div class="centered">Better luck next time.</div>
     {/if}
-    <div class="centered">
+    {#if $gameCache !== null}
+        <div class="centered smol">{getTimestampString($gameCache.timestamp)}</div>
+    {/if}
+    <div class="buttons centered">
         <button class="link-button" on:click={() => handleClick(true)}>
             Copy HTML results
             {#if isCopyHtmlPopoverOpen}
@@ -91,6 +119,10 @@
 </Dialog>
 
 <style>
+    .buttons {
+        margin-top: 4px;
+    }
+
     .centered {
         align-self: center;
     }
@@ -117,5 +149,10 @@
 
     .popover {
         top: -140%;
+    }
+
+    .smol {
+        font-size: 0.7em;
+        opacity: 0.5;
     }
 </style>

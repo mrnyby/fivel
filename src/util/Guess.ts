@@ -39,6 +39,10 @@ export default class Guess {
             && this.characters.every(character => character.color === GuessCharacterColor.Green);
     }
 
+    /**
+     * @param targetWord The target word to submit this guess against
+     * @returns true if this guess was valid, else false
+     */
     submit(targetWord: string) {
         if (this._characterCount < 5 || !dictionary.includes(this.characters.map(c => c.value).join(""))) {
             this._isValid = false;

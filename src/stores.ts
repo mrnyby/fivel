@@ -1,5 +1,6 @@
 import { derived, get, readable, writable } from "svelte/store";
 
+import GameCache from "./util/GameCache";
 import GameConfig from "./util/GameConfig";
 import Guess from "./util/Guess";
 import { GuessCharacterColor } from "./util/GuessCharacter";
@@ -39,6 +40,17 @@ const _createGuesses = () => {
                 guesses[nGuesses].characters.forEach(guessCharacter => {
                     keyColors.setKeyColor(guessCharacter.value, guessCharacter.color);
                 });
+
+                let submittedGuesses = guesses
+                    .filter(guess => guess.isSubmitted)
+                    .map(guess => guess.characters.reduce(
+                        (accumulator, guessCharacter) => accumulator += guessCharacter.value,
+                        ""
+                    ));
+
+                const newCache = new GameCache(submittedGuesses);
+                gameCache.set(newCache);
+                localStorage.setItem(nullCheckGameConfig.word, JSON.stringify(newCache));
 
                 if (nGuesses >= 5 || guesses[nGuesses].isCorrect()) {
                     postGameDialogIsVisible.set(true);
@@ -102,6 +114,9 @@ export const nextCharacterIndices = derived(guesses, $guesses => {
     return [nextGuessIndex, nextCharacterIndex] as [number, number];
 });
 export const gameConfig = readable(_serializedGameConfig === null ? null : GameConfig.deserialize(_serializedGameConfig));
+
+const cache: GameCache = JSON.parse(localStorage.getItem(get(gameConfig)?.word ?? "") ?? "null") ?? new GameCache([]);
+export const gameCache = writable(cache);
 
 export const createGameDialogIsVisible = writable(_serializedGameConfig === null);
 export const postGameDialogIsVisible = writable(false);

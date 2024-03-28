@@ -44,14 +44,8 @@
         position: absolute;
         top: 0;
         right: 0;
+        bottom: 0;
         left: 0;
-
-        /*
-         * I would prefer to use `bottom: 0;`, but mobile Safari:
-         * https://blog.opendigerati.com/the-eccentric-ways-of-ios-safari-with-the-keyboard-b5aa3f34228d
-         */
-        height: 100vh;
-        height: -webkit-fill-available;
 
         background: rgba(0, 0, 0, 0.4);
     }

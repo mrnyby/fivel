@@ -45,8 +45,9 @@
 <style>
     main {
         box-sizing: border-box;
-        height: 100%;
+        min-height: 100vh;
         padding: 8px;
+        position: relative;
 
         display: flex;
         align-items: center;

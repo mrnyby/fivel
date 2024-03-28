@@ -12,7 +12,7 @@
 
 {#if $isVisibleStore}
     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-    <div on:click={handleClick} on:keypress={handleClick} class="dialog-overlay" role="dialog">
+    <div on:click={handleClick} on:keypress={handleClick} class="scrim" role="dialog">
         <dialog on:click={(event) => event.stopPropagation()} on:keypress={(event) => event.stopPropagation()} open>
             <button on:click={handleClick}>
                 <span class="material-icons">close</span>
@@ -40,18 +40,20 @@
         top: 30%;
     }
 
-    .dialog-overlay {
+    .scrim {
         position: absolute;
         top: 0;
         right: 0;
-        bottom: 0;
         left: 0;
+
+        /* I would prefer to use `bottom: 0;`, but that approach only works in every browser _except_ mobile Safari */
+        height: 100vh;
 
         background: rgba(0, 0, 0, 0.4);
     }
 
     @media (prefers-color-scheme: dark) {
-        .dialog-overlay {
+        .scrim {
             background: rgba(0, 0, 0, 0.7);
         }
     }

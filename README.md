@@ -2,7 +2,7 @@
 
 [Play now!](https://mrnyby.github.io/fivel/)
 
-A create-your-own Wordle clone. Enter your favorite word, generate a game link, and send it to your friends.
+A create-your-own Wordle clone. Enter a word, generate a game link, and send it to your friends.
 
 | Game Creation                                 | Light                                                 |   Dark                                              |
 | --------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |

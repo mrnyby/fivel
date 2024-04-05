@@ -2,11 +2,46 @@
 
 [Play now!](https://mrnyby.github.io/fivel/)
 
-A create-your-own Wordle clone. Enter your favorite word, generate a game link, and send it to your homies!
+A create-your-own Wordle clone. Enter your favorite word, generate a game link, and send it to your friends.
 
-## Setup
+![create game](./screenshots/create-game.png)
 
-Install [NodeJS](https://nodejs.org/en), clone this repository, and run `npm install`.
+![play game light](./screenshots/play-game-light.png)
+
+![play game dark](./screenshots/play-game-dark.png)
+
+## Features
+
+### Sharing
+
+Simply click or tap "Copy results" from the post-game dialog to copy game results to your clipboard. Delete a few rows of emojis to impress your peers!
+
+```
+Game ID: 42
+2/6
+🟩🟨🟨🟨⬜
+🟩🟩🟩🟩🟩
+```
+
+### Game Saving
+
+Game progress is saved every time you submit a guess. Refresh the page without losing your work, and worry not about accidentally replaying games you've already completed.
+
+### Hints
+
+Are you making a puzzle with a challening word? Optionally provide a hint with the puzzles you create.
+
+### Responsive Theme
+
+Fivel automatically matches your operating system's light or dark theme. Bask in the sun, or hide in your cave; either way your eyes are safe.
+
+## Contributing
+
+Please report any problems on [GitHub](https://github.com/mrnyby/fivel/issues/new). For you nerd types, feel free to follow the instructions below and open a pull request.
+
+### Setup
+
+Install [NodeJS](https://nodejs.org/en), clone this repository, and run `npm install` in the root directory.
 
 ### Recommended IDE
 
@@ -22,7 +57,7 @@ This project uses several NPM scripts to manage various build tasks:
 1. `preview`: Starts a local server that hosts the code stored in the `docs` directory.
 1. `test`: Runs unit tests.
 
-## Technical considerations
+### Technical considerations
 
 **Why `global.d.ts` instead of `compilerOptions.types` inside `tsconfig.json`?**
 

@@ -4,11 +4,9 @@
 
 A create-your-own Wordle clone. Enter your favorite word, generate a game link, and send it to your friends.
 
-![create game](./screenshots/create-game.png)
-
-![play game light](./screenshots/play-game-light.png)
-
-![play game dark](./screenshots/play-game-dark.png)
+| Game Creation                                 | Light                                                 |   Dark                                              |
+| --------------------------------------------- | ----------------------------------------------------- | --------------------------------------------------- |
+| ![create game](./screenshots/create-game.png) | ![play game light](./screenshots/play-game-light.png) | ![play game dark](./screenshots/play-game-dark.png) |
 
 ## Features
 

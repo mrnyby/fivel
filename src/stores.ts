@@ -31,7 +31,7 @@ const _createGuesses = () => {
 
             return guesses;
         }),
-        submitGuess: () => update(guesses => {
+        submitGuess: (isFromCache = false) => update(guesses => {
             // Because `get(gameConfig)` can return null, save it off in a new variable so we can manually check its
             // nullness and appease the compiler. `isBlocked()` will already do the same thing, but the compiler can't
             // know that.
@@ -48,7 +48,7 @@ const _createGuesses = () => {
                         ""
                     ));
 
-                const newCache = new GameCache(submittedGuesses, get(gameCache).timestamp);
+                const newCache = new GameCache(submittedGuesses, isFromCache ? get(gameCache).timestamp : Date.now());
                 gameCache.set(newCache);
                 localStorage.setItem(nullCheckGameConfig.word, JSON.stringify(newCache));
 
@@ -115,7 +115,8 @@ export const nextCharacterIndices = derived(guesses, $guesses => {
 });
 export const gameConfig = readable(_serializedGameConfig === null ? null : GameConfig.deserialize(_serializedGameConfig));
 
-const cache: GameCache = JSON.parse(localStorage.getItem(get(gameConfig)?.word ?? "") ?? "null") ?? new GameCache([]);
+const cache: GameCache = JSON.parse(localStorage.getItem(get(gameConfig)?.word ?? "") ?? "null")
+    ?? new GameCache([], Date.now());
 export const gameCache = writable(cache);
 
 export const createGameDialogIsVisible = writable(_serializedGameConfig === null);

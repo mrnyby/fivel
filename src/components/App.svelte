@@ -11,7 +11,7 @@
 
     get(gameCache).guesses.forEach(guess => {
         [...guess].forEach(guessCharacter => guesses.addCharacter(guessCharacter));
-        guesses.submitGuess();
+        guesses.submitGuess(true);
     });
 
     const handleKeyDown = (event: KeyboardEvent) => {

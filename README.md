@@ -27,7 +27,7 @@ Game progress is saved every time you submit a guess. Refresh the page without l
 
 ### Hints
 
-Are you making a puzzle with a challening word? Optionally provide a hint with the puzzles you create.
+Are you making a puzzle with a challenging word? Optionally provide a hint with the puzzles you create.
 
 ### Responsive Theme
 

@@ -18,7 +18,8 @@ export default class GameConfig {
 
     static deserialize(s: string) {
         const binaryString = atob(s);
-        const bytes = Uint8Array.from(binaryString, (m) => m.codePointAt(0) ?? 0);
+        // 32 represents the space character in UTF-8
+        const bytes = Uint8Array.from(binaryString, (m) => m.codePointAt(0) ?? 32);
         const jsonString = new TextDecoder().decode(bytes);
         const json = JSON.parse(jsonString);
         return new GameConfig(json.word, json.gameId, json.hint);

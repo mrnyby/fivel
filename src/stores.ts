@@ -97,8 +97,14 @@ const _createKeyColors = () => {
     };
 };
 
-const _urlParams = new URLSearchParams(window.location.search);
-const _serializedGameConfig = _urlParams.get("f");
+// Using URLSearchParams might seem easier than manually parsing this URL. Unfortunately, URLSearchParams parses the
+// URL, and that includes decoding values. If our Base64 includes a "+", this is bad news. That plus will be decoded as
+// a space. That is *not* valid Base64 and will break when passed into GameConfig.deserialize().
+let _serializedGameConfig: string | null = null;
+if (location.search.length > 3) {
+    // Trim the "?f=" from our search
+    _serializedGameConfig = location.search.substring(3);
+}
 
 export const guesses = _createGuesses();
 export const guessesAreExhausted = derived(guesses, $guesses => $guesses.every(guess => guess.isSubmitted));

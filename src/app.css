@@ -31,7 +31,6 @@ body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: Arial, sans-serif;
-    height: 100%;
     margin: 0;
 }
 
@@ -65,10 +64,6 @@ h1 {
 
 h1.a-winner-is-you {
     margin-top: 8px;
-}
-
-html {
-    height: 100%;
 }
 
 @keyframes move {

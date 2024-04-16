@@ -2,7 +2,7 @@
     import { onDestroy } from "svelte";
 
     import { gameCache, gameConfig, guesses, guessIsCorrect, postGameDialogIsVisible } from "../../stores";
-    import { GuessCharacterColor } from "../../util/GuessCharacter";
+    import GuessCharacterColor from "../../util/GuessCharacterColor";
     import Dialog from "./Dialog.svelte";
 
     let isCopyPopoverOpen = false;

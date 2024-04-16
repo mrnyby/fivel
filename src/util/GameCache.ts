@@ -1,9 +1,4 @@
-export default class GameCache {
-    guesses: String[];
+export default interface GameCache {
+    guesses: string[];
     timestamp: number;
-
-    constructor(guesses: String[], timestamp: number) {
-        this.guesses = guesses;
-        this.timestamp = timestamp;
-    }
 }

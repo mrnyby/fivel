@@ -1,11 +1,18 @@
 <script lang="ts">
     import { gameConfig } from "../stores";
+    import HintLinkifier from "../util/HintLinkifier";
 </script>
 
 {#if $gameConfig?.hint !== undefined}
     <div>
         <strong>Hint:</strong>
-        {$gameConfig?.hint}
+        {#each HintLinkifier.linkify($gameConfig?.hint) as hintPiece}
+            {#if hintPiece.href === null}
+                {hintPiece.text}
+            {:else}
+                <a href={hintPiece.href} target="_blank">{hintPiece.text}</a>
+            {/if}
+        {/each}
     </div>
 {/if}
 

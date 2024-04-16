@@ -1,8 +1,8 @@
 import dictionary from "../dictionary";
-import GuessCharacter, { GuessCharacterColor } from "./GuessCharacter";
+import GuessCharacterColor from "./GuessCharacterColor";
 
 export default class Guess {
-    characters = Array.from({ length: 5 }, () => new GuessCharacter());
+    characters = Array.from({ length: 5 }, () => ({ value: "", color: GuessCharacterColor.Gray }));
 
     private _characterCount = 0;
     private _isSubmitted = false;

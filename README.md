@@ -25,6 +25,8 @@ Game ID: 42
 
 Game progress is saved every time you submit a guess. Refresh the page without losing your work, and worry not about accidentally replaying games you've already completed.
 
+**Note:** Progress is saved by game ID and word. For example, any history relating to `gameId=42, word=BEACH` will be treated separately from `gameId=43, word=BEACH`.
+
 ### Hints
 
 Are you making a puzzle with a challenging word? Optionally provide a hint with the puzzles you create. Any links contained in the hint will be detected and made clickable.

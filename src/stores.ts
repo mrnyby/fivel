@@ -49,11 +49,15 @@ const _createGuesses = () => {
                     ));
 
                 const newCache = {
+                    gameId: nullCheckGameConfig.gameId,
                     guesses: submittedGuesses,
                     timestamp: isFromCache ? get(gameCache).timestamp : Date.now(),
                 };
                 gameCache.set(newCache);
-                localStorage.setItem(nullCheckGameConfig.word, JSON.stringify(newCache));
+                localStorage.setItem(
+                    _getCacheKey(nullCheckGameConfig.gameId, nullCheckGameConfig.word),
+                    JSON.stringify(newCache)
+                );
 
                 if (nGuesses >= 5 || guesses[nGuesses].isCorrect()) {
                     postGameDialogIsVisible.set(true);
@@ -100,6 +104,8 @@ const _createKeyColors = () => {
     };
 };
 
+const _getCacheKey = (gameId: string|undefined, word: string) => `${gameId ?? ""}${word}`;
+
 // Using URLSearchParams might seem easier than manually parsing this URL. Unfortunately, URLSearchParams parses the
 // URL, and that includes decoding values. If our Base64 includes a "+", this is bad news. That plus will be decoded as
 // a space. That is *not* valid Base64 and will break when passed into GameConfig.deserialize().
@@ -124,8 +130,13 @@ export const nextCharacterIndices = derived(guesses, $guesses => {
 });
 export const gameConfig = readable(_serializedGameConfig === null ? null : GameConfig.deserialize(_serializedGameConfig));
 
-const cache = JSON.parse(localStorage.getItem(get(gameConfig)?.word ?? "") ?? "null")
-    ?? { guesses: [], timestamp: Date.now() };
+const gotGameConfig = get(gameConfig);
+let cache = { gameId: gotGameConfig?.gameId, guesses: [], timestamp: Date.now() };
+if (gotGameConfig !== null) {
+    // No need to be fancy with our keys. These will be unique for any possible gameId+word combintation.
+    const cacheKey = _getCacheKey(gotGameConfig.gameId, gotGameConfig.word);
+    cache = JSON.parse(localStorage.getItem(cacheKey) ?? "null") ?? cache;
+}
 export const gameCache = writable<GameCache>(cache);
 
 export const createGameDialogIsVisible = writable(_serializedGameConfig === null);

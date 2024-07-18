@@ -39,7 +39,7 @@
         const hours = date.getHours().toString().padStart(2, "0");
         const minutes = date.getMinutes().toString().padStart(2, "0");
 
-        return `Finished on ${month} ${day}, ${year} at ${hours}:${minutes}`;
+        return `Played on ${month} ${day}, ${year} at ${hours}:${minutes}`;
     };
 
     const handleClick = (outputHtml = false) => {
@@ -69,12 +69,19 @@
             })
             .join(separator);
 
-        navigator.clipboard.writeText(`${gameIdString}${nGuesses}/6${separator}${guessEmojis}`).then(() => {
+        let nGuessesString = `${nGuesses}/6${separator}`;
+        if (nGuesses === 6 && !$guessIsCorrect) {
+            nGuessesString = `💀/ 6${separator}`;
+        }
+
+        navigator.clipboard.writeText(`${gameIdString}${nGuessesString}${guessEmojis}`).then(() => {
             if (outputHtml) {
+                isCopyPopoverOpen = false;
                 isCopyHtmlPopoverOpen = true;
                 clearTimeout(copyHtmlPopoverTimeout);
                 copyHtmlPopoverTimeout = setTimeout(() => isCopyHtmlPopoverOpen = false, 3000);
             } else {
+                isCopyHtmlPopoverOpen = false;
                 isCopyPopoverOpen = true;
                 clearTimeout(copyPopoverTimeout);
                 copyPopoverTimeout = setTimeout(() => isCopyPopoverOpen = false, 3000);

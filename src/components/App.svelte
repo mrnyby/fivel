@@ -55,6 +55,12 @@
     }
 
     .spacer {
-        flex-grow: 1;
+        flex-grow: 0.1;
+    }
+
+    @media (max-width: 800px) {
+        .spacer {
+            flex-grow: 1;
+        }
     }
 </style>

@@ -10,7 +10,7 @@ describe("GameConfig", () => {
     });
 
     it("can serialize and deserialize a game using only a word and hint", () => {
-        expectSuccessfulSerialization(new GameConfig("poops", undefined, "Perhaps the funniest word of all time 💩"));
+        expectSuccessfulSerialization(new GameConfig("shire", undefined, "Baggins"));
     });
 
     it("can serialize and deserialize a game using only a word and game ID", () => {
@@ -18,7 +18,7 @@ describe("GameConfig", () => {
     });
 
     it("can serialize and deserialize a game using a word, hint, and game ID", () => {
-        expectSuccessfulSerialization(new GameConfig("blaze", "420", "What does it mean to rip the fattest cloud? 💨"));
+        expectSuccessfulSerialization(new GameConfig("beach", "43", "😎 and 🌊"));
     });
 });
 

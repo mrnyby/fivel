@@ -50,8 +50,9 @@
         position: relative;
 
         display: flex;
-        align-items: center;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .spacer {
@@ -59,6 +60,10 @@
     }
 
     @media (max-width: 800px) {
+        main {
+            justify-content: initial;
+        }
+
         .spacer {
             flex-grow: 1;
         }

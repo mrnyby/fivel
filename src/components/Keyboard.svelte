@@ -40,7 +40,7 @@
         {/each}
     </div>
     <div class="row">
-        <div class="spacer" />
+        <div class="spacer"></div>
         {#each [..."asdfghjkl"] as key}
             <button
                 class:gray={$keyColors.get(key) === GuessCharacterColor.Gray}
@@ -51,7 +51,7 @@
                 {key}
             </button>
         {/each}
-        <div class="spacer" />
+        <div class="spacer"></div>
     </div>
     <div class="row">
         <button data-key="enter">enter</button>

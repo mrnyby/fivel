@@ -22,7 +22,7 @@ export default class Guess {
         }
 
         this._isValid = true;
-        this.characters[this._characterCount++].value = character;
+        this.characters[this._characterCount++].value = character.toLowerCase();
     }
 
     deleteCharacter() {

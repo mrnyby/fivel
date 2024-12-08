@@ -2,6 +2,8 @@
     import type { Writable } from "svelte/store";
     import { fade } from "svelte/transition";
 
+    import { FADE_PARAMS } from "../../constants";
+
     export let isVisibleStore: Writable<boolean>;
     export let title: string;
     export let titleClass = "";
@@ -16,8 +18,8 @@
     <div
         on:click={handleClick}
         on:keypress={handleClick}
-        in:fade={{ duration: 100 }}
-        out:fade={{ duration: 100 }}
+        in:fade={FADE_PARAMS}
+        out:fade={FADE_PARAMS}
         class="scrim"
         role="dialog"
     >

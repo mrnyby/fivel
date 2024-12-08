@@ -174,7 +174,7 @@ html {
     align-items: center;
     justify-content: center;
 
-    transition: all linear 100ms;
+    transition: all linear 200ms;
 }
 
 .guess-grid {

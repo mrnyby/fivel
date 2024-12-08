@@ -1,6 +1,7 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
 
+    import { FADE_PARAMS } from "../../constants";
     import dictionary from "../../dictionary";
     import { createGameDialogIsVisible } from "../../stores";
     import GameConfig from "../../util/GameConfig";
@@ -54,7 +55,7 @@
             <button type="submit">
                 <span class="material-icons">add_link</span>
                 {#if isPopoverOpen}
-                    <span in:fade={{ duration: 100 }} out:fade={{ duration: 100 }} class="popover">
+                    <span in:fade={FADE_PARAMS} out:fade={FADE_PARAMS} class="popover">
                         Copied to clipboard
                     </span>
                 {/if}
@@ -68,9 +69,9 @@
     </form>
     <span class="result" class:error={errorMessage.length > 0}>
         {#if errorMessage.length > 0}
-            <span in:fade={{ duration: 100 }}>{errorMessage}</span>
+            <span in:fade={FADE_PARAMS}>{errorMessage}</span>
         {:else if link.length > 0}
-            <a in:fade={{ duration: 100 }} class="small-text" href={link}>{link}</a>
+            <a in:fade={FADE_PARAMS} class="small-text" href={link}>{link}</a>
         {:else}
             &nbsp;
         {/if}
@@ -93,7 +94,7 @@
         outline: 1px solid transparent;
         padding: 0 4px;
         position: relative;
-        transition: all linear 100ms;
+        transition: all linear 200ms;
 
         display: flex;
         align-items: center;
@@ -124,7 +125,7 @@
         font-size: 16px;
         outline: 1px solid transparent;
         padding: 4px;
-        transition: all linear 100ms;
+        transition: all linear 200ms;
     }
 
     input:focus {

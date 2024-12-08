@@ -2,6 +2,7 @@
     import { onDestroy } from "svelte";
     import { fade } from "svelte/transition";
 
+    import { FADE_PARAMS } from "../../constants";
     import { gameCache, gameConfig, guesses, guessIsCorrect, postGameDialogIsVisible } from "../../stores";
     import GuessCharacterColor from "../../util/GuessCharacterColor";
     import Dialog from "./Dialog.svelte";
@@ -113,14 +114,14 @@
         <button class="link-button" on:click={() => handleClick(true)}>
             Copy HTML results
             {#if isCopyHtmlPopoverOpen}
-                <span in:fade={{ duration: 100 }} out:fade={{ duration: 100 }} class="popover">🍎🦚</span>
+                <span in:fade={FADE_PARAMS} out:fade={FADE_PARAMS} class="popover">🍎🦚</span>
             {/if}
         </button>
         |
         <button class="link-button" on:click={() => handleClick()}>
             Copy results
             {#if isCopyPopoverOpen}
-                <span in:fade={{ duration: 100 }} out:fade={{ duration: 100 }} class="popover">
+                <span in:fade={FADE_PARAMS} out:fade={FADE_PARAMS} class="popover">
                     Copied to clipboard
                 </span>
             {/if}

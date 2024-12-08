@@ -1,6 +1,7 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
 
+    import { FADE_PARAMS } from "../constants";
     import { gameConfig, guesses, guessIsCorrect, nextCharacterIndices } from "../stores";
     import GuessCharacterColor from "../util/GuessCharacterColor";
 </script>
@@ -24,7 +25,7 @@
                 {#if character.value === ""}
                     {character.value}
                 {:else}
-                    <span in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>{character.value}</span>
+                    <span in:fade={FADE_PARAMS} out:fade={FADE_PARAMS}>{character.value}</span>
                 {/if}
             </div>
         {/each}

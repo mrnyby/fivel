@@ -71,6 +71,7 @@
 
 <style>
     button {
+        background: var(--color-light-gray);
         color: var(--color-darker-gray);
         padding: 1em 0.3em;
     }

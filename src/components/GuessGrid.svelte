@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { fade } from "svelte/transition";
+
     import { gameConfig, guesses, guessIsCorrect, nextCharacterIndices } from "../stores";
     import GuessCharacterColor from "../util/GuessCharacterColor";
 </script>
@@ -19,7 +21,11 @@
                 class:green={character.color === GuessCharacterColor.Green}
                 class:yellow={character.color === GuessCharacterColor.Yellow}
             >
-                {character.value}
+                {#if character.value === ""}
+                    {character.value}
+                {:else}
+                    <span in:fade={{ duration: 100 }} out:fade={{ duration: 100 }}>{character.value}</span>
+                {/if}
             </div>
         {/each}
     {/each}
@@ -42,10 +48,5 @@
 
     .invalid {
         border-color: var(--color-red);
-    }
-
-    .submitted.yellow {
-        background: var(--color-yellow);
-        border-color: var(--color-yellow);
     }
 </style>

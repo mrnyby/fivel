@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Writable } from "svelte/store";
+    import { fade } from "svelte/transition";
 
     export let isVisibleStore: Writable<boolean>;
     export let title: string;
@@ -12,7 +13,14 @@
 
 {#if $isVisibleStore}
     <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-    <div on:click={handleClick} on:keypress={handleClick} class="scrim" role="dialog">
+    <div
+        on:click={handleClick}
+        on:keypress={handleClick}
+        in:fade={{ duration: 100 }}
+        out:fade={{ duration: 100 }}
+        class="scrim"
+        role="dialog"
+    >
         <dialog on:click={(event) => event.stopPropagation()} on:keypress={(event) => event.stopPropagation()} open>
             <button on:click={handleClick}>
                 <span class="material-icons">close</span>

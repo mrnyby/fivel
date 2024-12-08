@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onDestroy } from "svelte";
+    import { fade } from "svelte/transition";
 
     import { gameCache, gameConfig, guesses, guessIsCorrect, postGameDialogIsVisible } from "../../stores";
     import GuessCharacterColor from "../../util/GuessCharacterColor";
@@ -112,14 +113,16 @@
         <button class="link-button" on:click={() => handleClick(true)}>
             Copy HTML results
             {#if isCopyHtmlPopoverOpen}
-                <span class="popover">🍎🦚</span>
+                <span in:fade={{ duration: 100 }} out:fade={{ duration: 100 }} class="popover">🍎🦚</span>
             {/if}
         </button>
         |
         <button class="link-button" on:click={() => handleClick()}>
             Copy results
             {#if isCopyPopoverOpen}
-                <span class="popover">Copied to clipboard</span>
+                <span in:fade={{ duration: 100 }} out:fade={{ duration: 100 }} class="popover">
+                    Copied to clipboard
+                </span>
             {/if}
         </button>
 </div>

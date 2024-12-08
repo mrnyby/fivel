@@ -45,6 +45,11 @@ button {
     margin: 0.1em;
     padding: 0.5em 1em;
     text-transform: uppercase;
+    transition: filter 70ms linear;
+}
+
+button:active {
+    filter: brightness(70%);
 }
 
 dialog {
@@ -168,6 +173,8 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    transition: all linear 100ms;
 }
 
 .guess-grid {
@@ -219,4 +226,9 @@ html {
 .submitted.green {
     background: var(--color-green);
     border-color: var(--color-green);
+}
+
+.submitted.yellow {
+    background: var(--color-yellow);
+    border-color: var(--color-yellow);
 }

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { fade } from "svelte/transition";
+
     import dictionary from "../../dictionary";
     import { createGameDialogIsVisible } from "../../stores";
     import GameConfig from "../../util/GameConfig";
@@ -52,7 +54,9 @@
             <button type="submit">
                 <span class="material-icons">add_link</span>
                 {#if isPopoverOpen}
-                    <span class="popover">Copied to clipboard</span>
+                    <span in:fade={{ duration: 100 }} out:fade={{ duration: 100 }} class="popover">
+                        Copied to clipboard
+                    </span>
                 {/if}
             </button>
         </div>
@@ -64,9 +68,9 @@
     </form>
     <span class="result" class:error={errorMessage.length > 0}>
         {#if errorMessage.length > 0}
-            {errorMessage}
+            <span in:fade={{ duration: 100 }}>{errorMessage}</span>
         {:else if link.length > 0}
-            <a class="small-text" href={link}>{link}</a>
+            <a in:fade={{ duration: 100 }} class="small-text" href={link}>{link}</a>
         {:else}
             &nbsp;
         {/if}
@@ -89,7 +93,7 @@
         outline: 1px solid transparent;
         padding: 0 4px;
         position: relative;
-        transition: all linear 0.1s;
+        transition: all linear 100ms;
 
         display: flex;
         align-items: center;
@@ -120,7 +124,7 @@
         font-size: 16px;
         outline: 1px solid transparent;
         padding: 4px;
-        transition: all linear 0.1s;
+        transition: all linear 100ms;
     }
 
     input:focus {

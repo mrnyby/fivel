@@ -14,7 +14,7 @@
 </script>
 
 {#if $isVisibleStore}
-    <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+    <!-- svelte-ignore a11y-interactive-supports-focus -->
     <div
         on:click={handleClick}
         on:keypress={handleClick}

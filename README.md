@@ -23,7 +23,7 @@ Game ID: 42
 
 ### Game Saving
 
-Game progress is saved every time you submit a guess. Refresh the page without losing your work, and worry not about accidentally replaying games you've already completed.
+Game progress is saved in your browser cache every time you submit a guess. Refresh the page without losing your work, and don't worry about accidentally replaying games you've already completed.
 
 **Note:** Progress is saved by game ID and word. For example, any history relating to `gameId=42, word=BEACH` will be treated separately from `gameId=43, word=BEACH`.
 
@@ -37,7 +37,7 @@ Fivel automatically matches your operating system's light or dark theme. Bask in
 
 ## Contributing
 
-Please report any problems on [GitHub](https://github.com/mrnyby/fivel/issues/new). For you nerd types, feel free to follow the instructions below and open a pull request.
+Please report any problems on [GitHub](https://github.com/mrnyby/fivel/issues/new). For you nerds, feel free to follow the instructions below and open a pull request.
 
 ### Setup
 

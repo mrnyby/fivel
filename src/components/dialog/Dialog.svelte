@@ -9,7 +9,7 @@
     export let titleClass = "";
 
     const handleClick = () => {
-        isVisibleStore.set(false);
+        $isVisibleStore = false;
     };
 </script>
 

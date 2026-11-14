@@ -8,11 +8,11 @@
     } from "../stores";
 
     const handleNewGameClick = () => {
-        createGameDialogIsVisible.set(true);
+        $createGameDialogIsVisible = true;
     };
 
     const handleViewResultsClick = () => {
-        postGameDialogIsVisible.set(true);
+        $postGameDialogIsVisible = true;
     };
 </script>
 

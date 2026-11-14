@@ -5,6 +5,18 @@ import GameConfig from "./util/GameConfig";
 import Guess from "./util/Guess";
 import GuessCharacterColor from "./util/GuessCharacterColor";
 
+const _createActiveCharacterIndex = () => {
+    const { set, subscribe, update } = writable(0);
+
+    return {
+        // set: (n: number) => { set(Math.min(Math.max(n, 0), 4)) },
+        increment: () => { update(number => number < 4 ? ++number : number) },
+        decrement: () => { update(number => number > 0 ? --number : number) },
+        reset: () => { set(0) },
+        subscribe: subscribe,
+    };
+};
+
 const _createGuesses = () => {
     const { subscribe, update } = writable(Array.from({ length: 6 }, () => new Guess()));
     const isBlocked = () =>
@@ -17,16 +29,20 @@ const _createGuesses = () => {
     let nGuesses = 0;
 
     return {
-        addCharacter: (character: string) => update(guesses => {
+        setCharacter: (character: string) => update(guesses => {
             if (!isBlocked()) {
-                guesses[nGuesses].addCharacter(character);
+                const index = get(activeCharacterIndex);
+                guesses[nGuesses].setCharacter(index, character);
+                activeCharacterIndex.increment();
             }
 
             return guesses;
         }),
         deleteCharacter: () => update(guesses => {
             if (!isBlocked()) {
-                guesses[nGuesses].deleteCharacter();
+                const index = get(activeCharacterIndex);
+                guesses[nGuesses].deleteCharacter(index);
+                activeCharacterIndex.decrement();
             }
 
             return guesses;
@@ -64,6 +80,7 @@ const _createGuesses = () => {
                 }
 
                 nGuesses++;
+                activeCharacterIndex.reset();
             }
 
             return guesses;
@@ -93,7 +110,10 @@ const _createKeyColors = () => {
                     }
                     break;
                 case GuessCharacterColor.Gray:
-                    if (keyColors.get(key) !== GuessCharacterColor.Green && keyColors.get(key) !== GuessCharacterColor.Yellow) {
+                    if (
+                        keyColors.get(key) !== GuessCharacterColor.Green
+                        && keyColors.get(key) !== GuessCharacterColor.Yellow
+                    ) {
                         keyColors.set(key, color);
                     }
             }
@@ -115,20 +135,15 @@ if (location.search.length > 3) {
     _serializedGameConfig = location.search.substring(3);
 }
 
+export const activeCharacterIndex = _createActiveCharacterIndex();
 export const guesses = _createGuesses();
 export const guessesAreExhausted = derived(guesses, $guesses => $guesses.every(guess => guess.isSubmitted));
 export const guessIsCorrect = derived(guesses, $guesses => $guesses.find(guess => guess.isCorrect()) !== undefined);
 export const keyColors = _createKeyColors();
-export const nextCharacterIndices = derived(guesses, $guesses => {
-    const nextGuessIndex = $guesses.findIndex(guess => !guess.isSubmitted);
-    if (nextGuessIndex === -1) {
-        return [-1, -1] as [number, number];
-    }
-
-    const nextCharacterIndex = $guesses[nextGuessIndex].characters.findIndex(character => character.value === "");
-    return [nextGuessIndex, nextCharacterIndex] as [number, number];
-});
-export const gameConfig = readable(_serializedGameConfig === null ? null : GameConfig.deserialize(_serializedGameConfig));
+export const nextGuessIndex = derived(guesses, $guesses => $guesses.findIndex(guess => !guess.isSubmitted));
+export const gameConfig = readable(
+    _serializedGameConfig === null ? null : GameConfig.deserialize(_serializedGameConfig)
+);
 
 const gotGameConfig = get(gameConfig);
 let cache = { gameId: gotGameConfig?.gameId, guesses: [], timestamp: Date.now() };

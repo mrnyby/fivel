@@ -4,7 +4,6 @@ import GuessCharacterColor from "./GuessCharacterColor";
 export default class Guess {
     characters = Array.from({ length: 5 }, () => ({ value: "", color: GuessCharacterColor.Gray }));
 
-    private _characterCount = 0;
     private _isSubmitted = false;
     private _isValid = true;
 
@@ -16,26 +15,26 @@ export default class Guess {
         return this._isValid;
     }
 
-    addCharacter(character: string) {
-        if (this._characterCount === 5) {
+    setCharacter(index: number, character: string) {
+        if (index < 0 || index > 4) {
             return;
         }
 
         this._isValid = true;
-        this.characters[this._characterCount++].value = character.toLowerCase();
+        this.characters[index].value = character.toLowerCase();
     }
 
-    deleteCharacter() {
-        if (this._characterCount === 0) {
+    deleteCharacter(index: number) {
+        if (index < 0 || index > 4) {
             return;
         }
 
         this._isValid = true;
-        this.characters[this._characterCount-- - 1].value = "";
+        this.characters[index].value = "";
     }
 
     isCorrect() {
-        return this._characterCount === 5
+        return this.characters.every(character => character.value !== "")
             && this.characters.every(character => character.color === GuessCharacterColor.Green);
     }
 
@@ -44,7 +43,10 @@ export default class Guess {
      * @returns true if this guess was valid, else false
      */
     submit(targetWord: string) {
-        if (this._characterCount < 5 || !dictionary.includes(this.characters.map(c => c.value).join(""))) {
+        if (
+            this.characters.some(character => character.value === "")
+            || !dictionary.includes(this.characters.map(c => c.value).join(""))
+        ) {
             this._isValid = false;
             return false;
         } else {

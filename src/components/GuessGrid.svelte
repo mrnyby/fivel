@@ -2,20 +2,34 @@
     import { fade } from "svelte/transition";
 
     import { FADE_PARAMS } from "../constants";
-    import { gameConfig, guesses, guessIsCorrect, nextCharacterIndices } from "../stores";
+    import { activeCharacterIndex, gameConfig, guesses, guessIsCorrect, nextGuessIndex } from "../stores";
     import GuessCharacterColor from "../util/GuessCharacterColor";
+
+    const handleCellClick = (event: Event) => {
+        const eventElement = event.currentTarget as HTMLElement;
+
+        if (parseInt(eventElement.dataset.guessIndex ?? "") !== $nextGuessIndex) {
+            return;
+        }
+
+        $activeCharacterIndex = parseInt(eventElement.dataset.characterIndex ?? "");
+    };
 </script>
 
 <div class="guess-grid">
     {#each $guesses as guess, i}
         {#each guess.characters as character, j}
+            <!-- svelte-ignore a11y-click-events-have-key-events a11y-no-static-element-interactions -->
             <div
+                on:click={handleCellClick}
+                data-guess-index={i}
+                data-character-index={j}
                 class="guess-cell"
                 class:active={
                     $gameConfig !== null
                     && !$guessIsCorrect
-                    && $nextCharacterIndices[0] === i
-                    && ($nextCharacterIndices[1] === j || character.value !== "")
+                    && $nextGuessIndex === i
+                    && $activeCharacterIndex === j
                 }
                 class:invalid={!guess.isValid && character.value !== ""}
                 class:submitted={guess.isSubmitted}

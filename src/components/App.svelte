@@ -1,7 +1,5 @@
 <script lang="ts">
-    import { get } from "svelte/store";
-
-    import { gameCache, guesses } from "../stores";
+    import { activeCharacterIndex, gameCache, guesses } from "../stores";
     import CreateGameDialog from "./dialog/CreateGameDialog.svelte";
     import PostGameDialog from "./dialog/PostGameDialog.svelte";
     import GuessGrid from "./GuessGrid.svelte";
@@ -9,23 +7,29 @@
     import Keyboard from "./Keyboard.svelte";
     import TopNav from "./TopNav.svelte";
 
-    get(gameCache).guesses.forEach(guess => {
-        [...guess].forEach(guessCharacter => guesses.addCharacter(guessCharacter));
+    $gameCache.guesses.forEach(guess => {
+        [...guess].forEach(guessCharacter => guesses.setCharacter(guessCharacter));
         guesses.submitGuess(true);
     });
 
     const handleKeyDown = (event: KeyboardEvent) => {
         const key = event.key;
         switch (key) {
-            case "Enter":
-                guesses.submitGuess();
-                break;
             case "Backspace":
                 guesses.deleteCharacter();
                 break;
+            case "ArrowLeft":
+                activeCharacterIndex.decrement();
+                break;
+            case "ArrowRight":
+                activeCharacterIndex.increment();
+                break;
+            case "Enter":
+                guesses.submitGuess();
+                break;
             default:
                 if (/^[a-z]$/i.test(key)) {
-                    guesses.addCharacter(key);
+                    guesses.setCharacter(key);
                 }
         }
     };

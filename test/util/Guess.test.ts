@@ -30,7 +30,7 @@ describe("Guess", () => {
     casingTestCases.forEach((testCase) => {
         it(`ignores casing of the guess "${testCase}"`, () => {
             const guess = new Guess();
-            [...testCase].forEach(character => guess.addCharacter(character));
+            [...testCase].forEach((c, i) => guess.setCharacter(i, c));
             expect(guess.submit("snake")).toBe(true);
         });
     });
@@ -44,7 +44,7 @@ describe("Guess", () => {
     colorTestCases.forEach((testCase) => {
         it(`properly colors a guess of "${testCase.guess}" against "${testCase.target}"`, () => {
             const guess = new Guess();
-            [...testCase.guess].forEach(character => guess.addCharacter(character));
+            [...testCase.guess].forEach((c, i) => guess.setCharacter(i, c));
             guess.submit(testCase.target);
 
             testCase.colors.forEach((color, index) => expect(guess.characters[index].color).toBe(color));

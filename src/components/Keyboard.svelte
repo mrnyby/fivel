@@ -19,7 +19,7 @@
                 break;
             default:
                 if (key !== undefined) {
-                    guesses.addCharacter(key);
+                    guesses.setCharacter(key);
                 }
         }
     };

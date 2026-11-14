@@ -8,11 +8,12 @@
     const handleCellClick = (event: Event) => {
         const eventElement = event.currentTarget as HTMLElement;
 
+        console.log(eventElement.dataset.guessIndex);
         if (parseInt(eventElement.dataset.guessIndex ?? "") !== $nextGuessIndex) {
             return;
         }
 
-        $activeCharacterIndex = parseInt(eventElement.dataset.characterIndex ?? "");
+        activeCharacterIndex.set(parseInt(eventElement.dataset.characterIndex ?? ""));
     };
 </script>
 

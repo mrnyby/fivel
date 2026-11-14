@@ -9,7 +9,7 @@ const _createActiveCharacterIndex = () => {
     const { set, subscribe, update } = writable(0);
 
     return {
-        // set: (n: number) => { set(Math.min(Math.max(n, 0), 4)) },
+        set: (n: number) => { set(Math.min(Math.max(n, 0), 4)) },
         increment: () => { update(number => number < 4 ? ++number : number) },
         decrement: () => { update(number => number > 0 ? --number : number) },
         reset: () => { set(0) },
